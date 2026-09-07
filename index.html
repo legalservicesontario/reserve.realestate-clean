@@ -1,130 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserve.RealEstate | Luxury Properties Caribbean</title>
-  <meta name="description" content="Luxury real estate in Dominican Republic and Costa Rica - Tamarindo, Cabarete, Sosúa, Puerto Plata">
-  <meta property="og:title" content="Reserve.RealEstate - Luxury Caribbean Properties">
-  <meta property="og:description" content="Exclusive properties available for sale and rent in paradise">
-  <meta property="og:type" content="website">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RESERVE.REAL ESTATE — Luxury & Tropical Rentals in Dominican Republic & Costa Rica</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            harbor: {
+              50: '#f4f6f8', 100: '#e5e9ee', 200: '#cbd4e0', 300: '#a2b2c8',
+              400: '#738ba9', 500: '#516d8e', 600: '#3e5473', 700: '#33445e',
+              800: '#2d3a4e', 900: '#293243', 950: '#0f141c',
+            },
+            tide: {
+              50: '#f0fdfa', 300: '#5eead4', 400: '#2dd4bf', 700: '#0f766e', 800: '#115e59',
+            },
+            coral: { 300: '#fca5a5', 700: '#b91c1c' },
+            sand: { 50: '#fbfaf8' }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root{--gold:#c8a96a;--cream:#f8f6f0;--dark:#0b0b0b;}
-    body{margin:0;background:var(--cream);color:#111;font-family:'Inter',sans-serif;}
-    h1,h2,h3{font-family:'Cormorant Garamond',serif;}
-    .hero{height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.25)),url("images/penthouse-hero.jpg");background-size:cover;background-position:center;display:flex;align-items:center;}
-    .gold{color:var(--gold);}
-    .glass{background:rgba(255,255,255,.12);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.25);}
-    .card{background:white;border-radius:30px;box-shadow:0 20px 60px rgba(0,0,0,.08);}
-    .gallery img{height:350px;width:100%;object-fit:cover;border-radius:25px;transition:.5s;}
-    .gallery img:hover{transform:scale(1.04);}
-    .fade{animation:fadeIn 1.5s ease;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-    .gold-line{width:80px;height:3px;background:var(--gold);margin:auto;}
-    input,textarea,select{font-family:'Inter',sans-serif;}
-    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center;}
-    .modal.active{display:flex;}
-    .modal-content{background:white;border-radius:20px;padding:40px;max-width:500px;width:90%;position:relative;}
-    .close-modal{position:absolute;top:20px;right:20px;background:none;border:none;font-size:28px;cursor:pointer;color:#666;}
-    .nav-header{position:fixed;top:0;left:0;right:0;z-index:100;background:white/95;backdrop-filter:blur(10px);border-bottom:1px solid #e5e7eb;}
-    .hero{margin-top:80px;}
+    @keyframes kenburns {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+    .animate-kenburns { animation: kenburns 20s ease-in-out infinite; }
   </style>
 </head>
-<body>
-  <nav class="nav-header flex justify-between items-center px-8 py-4">
-    <div class="text-2xl tracking-[8px] font-bold">RESERVE.REALESTATE</div>
-    <div class="hidden md:flex gap-10 uppercase tracking-widest text-sm">
-      <a href="#properties" class="hover:text-[#c8a96a] transition">Properties</a>
-      <a href="map.html" class="hover:text-[#c8a96a] transition">Map</a>
-      <a href="commercial.html" class="hover:text-[#c8a96a] transition">Commercial</a>
-      <a href="#contact" class="hover:text-[#c8a96a] transition">Contact</a>
+<body class="min-h-screen flex flex-col font-sans bg-sand-50 text-harbor-900">
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-harbor-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 gap-4">
+      <a class="flex items-center gap-2 shrink-0 font-extrabold text-xl tracking-wider text-harbor-950 uppercase" href="#">
+        RESERVE<span class="text-tide-700">.REAL ESTATE</span>
+      </a>
+      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="#">Search Properties</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="#">Dominican Republic</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="#">Costa Rica</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="#">Agents</a>
+        <a class="px-3 py-2 rounded-lg text-tide-700 hover:bg-tide-50 font-semibold" href="#">List Your Property</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <label class="relative">
+          <span class="sr-only">Language</span>
+          <select class="h-9 max-w-28 appearance-none rounded-full border border-harbor-200 bg-white py-1 pl-3 pr-7 text-xs font-semibold text-harbor-800 outline-none hover:border-harbor-300">
+            <option value="en" selected>English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+          <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-harbor-500">▾</span>
+        </label>
+        <a class="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-harbor-700 hover:text-harbor-950" href="#">Log in</a>
+        <a class="px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors" href="#">Sign up</a>
+      </div>
     </div>
-    <div class="flex gap-4 items-center">
-      <button id="loginBtn" class="px-4 py-2 text-sm font-semibold text-[#0b0b0b] hover:text-[#c8a96a] transition">Login</button>
-      <button id="signupBtn" class="px-4 py-2 text-sm font-semibold bg-[#c8a96a] text-black rounded-lg hover:bg-[#b39657] transition">Sign Up</button>
-      <button id="dashboardBtn" style="display:none;" class="px-4 py-2 text-sm font-semibold bg-[#c8a96a] text-black rounded-lg hover:bg-[#b39657] transition">Dashboard</button>
-      <button id="logoutBtn" style="display:none;" class="px-4 py-2 text-sm font-semibold text-red-600 hover:text-red-800 transition">Logout</button>
+  </header>
+
+  <main class="flex-1">
+    <section class="relative bg-harbor-950">
+      <div aria-hidden="true" class="absolute inset-0 overflow-hidden">
+        <img alt="Luxury Resort" class="object-cover w-full h-full opacity-100 animate-kenburns" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80" />
+        <div class="absolute inset-0 bg-gradient-to-r from-harbor-950/90 via-harbor-950/70 to-harbor-900/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-harbor-950/60 via-transparent to-transparent"></div>
+      </div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-16 sm:pt-28 sm:pb-24">
+        <p class="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-4 py-1.5 text-sm font-semibold text-white">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M12 5c-3 0-5 2-6 5m6-5c3 0 5 2 6 5M12 5c-1 3-1 6 0 9m0 0v8" stroke-linecap="round"></path></svg>
+          Reserve Your Luxury Escape in Paradise
+        </p>
+        
+        <h1 class="mt-5 text-4xl sm:text-6xl font-extrabold tracking-tight text-white max-w-3xl leading-tight">
+          Find your next home in Dominican Republic & Costa Rica.
+        </h1>
+        
+        <p class="mt-4 text-base sm:text-lg text-white/90 max-w-xl">
+          Search exclusive villa rentals, curated residential investments, and long-term retreats with trusted professionals.
+        </p>
+
+        <div class="mt-8 max-w-4xl">
+          <form class="bg-white rounded-2xl shadow-xl p-3 sm:p-4 grid gap-3 sm:grid-cols-[1fr_auto_auto_auto_auto] items-center">
+            <div class="relative">
+              <label for="home-q" class="sr-only">City, region, or neighborhood…</label>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-harbor-400"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2" stroke-linecap="round"></path></svg>
+              <input id="home-q" placeholder="Punta Cana, Las Terrenas, Tamarindo…" class="w-full border-0 ring-0 pl-10 h-12 text-base text-harbor-900 outline-none" />
+            </div>
+            
+            <select class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none">
+              <option value="" selected>Any price</option>
+              <option value="1000">≤ $1,000 / mo</option>
+              <option value="2500">≤ $2,500 / mo</option>
+              <option value="5000">≤ $5,000 / mo</option>
+              <option value="10000">≤ $10,000 / mo</option>
+            </select>
+            
+            <select class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none">
+              <option value="" selected>Any type</option>
+              <option value="villa">Luxury Villa</option>
+              <option value="apartment">Apartment</option>
+              <option value="condo">Beachfront Condo</option>
+              <option value="penthouse">Penthouse</option>
+            </select>
+            
+            <select class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none">
+              <option value="" selected>Any duration</option>
+              <option value="LONG_TERM">Long term</option>
+              <option value="VACATION">Vacation stay</option>
+            </select>
+            
+            <button type="submit" class="h-12 px-7 bg-tide-700 hover:bg-tide-800 text-white font-semibold rounded-lg shadow transition-colors">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <nav aria-label="Popular right now:" class="mt-5 flex flex-wrap items-center gap-2">
+          <span class="text-sm font-medium text-white/70">Popular destinations:</span>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="#">Punta Cana</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="#">Las Terrenas</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="#">Santo Domingo</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="#">Tamarindo (CR)</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="#">Papagayo (CR)</a>
+        </nav>
+
+        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-white/85">
+          <li class="flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-tide-300"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg> Verified luxury listings
+          </li>
+          <li class="flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-tide-300"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg> Direct broker support
+          </li>
+          <li class="flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-tide-300"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg> Multilingual concierge
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 py-12">
+      <div class="flex items-end justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl font-bold text-harbor-900">Featured Reserve Properties</h2>
+          <p class="mt-1 text-sm text-harbor-500">Handpicked luxury residences in Dominican Republic & Costa Rica</p>
+        </div>
+        <a class="text-sm font-semibold text-tide-700 hover:text-tide-800 shrink-0" href="#">View all properties →</a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
+          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
+            <img alt="Cocotal Golf Villa" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" />
+            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
+              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Available</span>
+              <span class="bg-harbor-900/90 text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Punta Cana</span>
+            </div>
+            <button class="absolute top-2.5 right-2.5 bg-white/90 hover:bg-white text-harbor-800 rounded-full w-9 h-9 flex items-center justify-center shadow">♡</button>
+          </div>
+          <div class="p-4">
+            <p class="text-lg font-bold text-harbor-900">$2,800 <span class="text-xs text-harbor-500 font-normal">/ month</span></p>
+            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">Cocotal Golf & Country Club Luxury Villa</h3>
+            <p class="mt-0.5 text-sm text-harbor-500">Bávaro, Dominican Republic</p>
+            <p class="mt-3 text-xs text-harbor-600 flex gap-4 border-t border-harbor-100 pt-2">
+              <span><strong>3</strong> Beds</span>
+              <span><strong>3.5</strong> Baths</span>
+              <span><strong>240</strong> m²</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
+          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
+            <img alt="Los Corales Condo" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" />
+            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
+              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Available</span>
+            </div>
+            <button class="absolute top-2.5 right-2.5 bg-white/90 hover:bg-white text-harbor-800 rounded-full w-9 h-9 flex items-center justify-center shadow">♡</button>
+          </div>
+          <div class="p-4">
+            <p class="text-lg font-bold text-harbor-900">$1,600 <span class="text-xs text-harbor-500 font-normal">/ month</span></p>
+            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">Beachside Condo 5-Mins from Ocean</h3>
+            <p class="mt-0.5 text-sm text-harbor-500">Los Corales, Dominican Republic</p>
+            <p class="mt-3 text-xs text-harbor-600 flex gap-4 border-t border-harbor-100 pt-2">
+              <span><strong>2</strong> Beds</span>
+              <span><strong>2</strong> Baths</span>
+              <span><strong>110</strong> m²</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
+          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
+            <img alt="Costa Rica Ocean View Villa" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" />
+            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
+              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Featured</span>
+              <span class="bg-harbor-900/90 text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Costa Rica</span>
+            </div>
+            <button class="absolute top-2.5 right-2.5 bg-white/90 hover:bg-white text-harbor-800 rounded-full w-9 h-9 flex items-center justify-center shadow">♡</button>
+          </div>
+          <div class="p-4">
+            <p class="text-lg font-bold text-harbor-900">$4,500 <span class="text-xs text-harbor-500 font-normal">/ month</span></p>
+            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">Tamarindo Oceanfront Luxury Reserve Villa</h3>
+            <p class="mt-0.5 text-sm text-harbor-500">Guanacaste, Costa Rica</p>
+            <p class="mt-3 text-xs text-harbor-600 flex gap-4 border-t border-harbor-100 pt-2">
+              <span><strong>4</strong> Beds</span>
+              <span><strong>4.5</strong> Baths</span>
+              <span><strong>350</strong> m²</span>
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-harbor-950 text-white py-8 border-t border-harbor-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-harbor-400">
+      <p>© RESERVE.REAL ESTATE — Dominican Republic & Costa Rica Luxury Real Estate.</p>
+      <div class="flex gap-4">
+        <a class="hover:text-white" href="#">Privacy Policy</a>
+        <a class="hover:text-white" href="#">Terms of Service</a>
+        <a class="hover:text-white" href="#">Contact Us</a>
+      </div>
     </div>
-  </nav>
+  </footer>
 
-  <div id="loginModal" class="modal"><div class="modal-content"><button class="close-modal" onclick="closeModal('loginModal')">&times;</button><h2 class="text-3xl font-bold mb-6">Login</h2><form id="loginForm" action="https://formspree.io/f/xdeownje" method="POST" class="grid gap-4"><input type="hidden" name="_subject" value="User Login Request"><input type="email" name="email" placeholder="Email Address" required class="p-3 border rounded-lg"><input type="password" name="password" placeholder="Password" required class="p-3 border rounded-lg"><button type="submit" class="p-3 bg-[#c8a96a] text-black font-semibold rounded-lg hover:bg-[#b39657]">Login</button></form><p class="text-center mt-4 text-sm">Don't have an account? <button onclick="switchModal('loginModal', 'signupModal')" class="text-[#c8a96a] font-semibold hover:underline">Sign Up</button></p></div></div>
-  <div id="signupModal" class="modal"><div class="modal-content"><button class="close-modal" onclick="closeModal('signupModal')">&times;</button><h2 class="text-3xl font-bold mb-6">Create Account</h2><form id="signupForm" action="https://formspree.io/f/xdeownje" method="POST" class="grid gap-4"><input type="hidden" name="_subject" value="New User Registration"><input type="text" name="full_name" placeholder="Full Name" required class="p-3 border rounded-lg"><input type="email" name="email" placeholder="Email Address" required class="p-3 border rounded-lg"><input type="tel" name="phone" placeholder="Phone Number" class="p-3 border rounded-lg"><input type="password" name="password" placeholder="Password" required class="p-3 border rounded-lg"><input type="password" name="confirm_password" placeholder="Confirm Password" required class="p-3 border rounded-lg"><button type="submit" class="p-3 bg-[#c8a96a] text-black font-semibold rounded-lg hover:bg-[#b39657]">Create Account</button></form><p class="text-center mt-4 text-sm">Already have an account? <button onclick="switchModal('signupModal', 'loginModal')" class="text-[#c8a96a] font-semibold hover:underline">Login</button></p></div></div>
-
-  <section class="hero text-white"><div class="max-w-7xl mx-auto px-8 w-full"><div class="glass rounded-3xl p-10 max-w-3xl fade"><p class="uppercase tracking-[8px] mb-6 text-sm">Exclusive Caribbean Collection</p><h1 class="text-5xl leading-tight mb-8">Luxury<br>Properties<br>Paradise</h1><h2 class="text-2xl mb-10">Dominican Republic & Costa Rica</h2><div class="mb-12"><p class="gold uppercase text-sm">Locations</p><p class="text-xl mt-2">Tamarindo (CR) • Cabarete • Sosúa • Puerto Plata (DR)</p></div><a href="#search" class="inline-block bg-white text-black px-10 py-5 rounded-full uppercase tracking-widest hover:bg-gray-200">Start Searching</a></div></div></section>
-
-  <section id="search" class="bg-white py-12 border-b"><div class="max-w-7xl mx-auto px-8"><h2 class="text-3xl font-bold mb-8">Find Your Dream Property</h2><div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4"><select id="location" class="p-3 border rounded-lg bg-white"><option value="">All Locations</option><option value="tamarindo">Tamarindo, Costa Rica</option><option value="cabarete">Cabarete, Dominican Republic</option><option value="sosua">Sosúa, Dominican Republic</option><option value="puerto-plata">Puerto Plata, Dominican Republic</option></select><select id="type" class="p-3 border rounded-lg bg-white"><option value="">All Types</option><option value="villa">Villa</option><option value="condo">Condo</option><option value="penthouse">Penthouse</option><option value="land">Land</option></select><select id="purpose" class="p-3 border rounded-lg bg-white"><option value="">For Sale or Rent</option><option value="sale">For Sale</option><option value="rent">For Rent</option></select><select id="beds" class="p-3 border rounded-lg bg-white"><option value="">Any Bedrooms</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select><button onclick="applyFilters()" class="p-3 bg-[#c8a96a] text-black font-semibold rounded-lg hover:bg-[#b39657] transition">Search</button></div></div></section>
-
-  <section id="properties" class="max-w-7xl mx-auto px-8 py-28">
-    <div class="text-center mb-16">
-      <h2 class="text-5xl">Featured Properties</h2>
-      <p class="mt-4 text-lg text-gray-600">Showing 5 luxury properties</p>
-      <div class="gold-line mt-6"></div>
-    </div>
-    <div id="featured" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-  </section>
-
-  <section id="contact" class="bg-[#111] text-white py-28 px-8"><div class="max-w-5xl mx-auto"><h2 class="text-5xl text-center mb-6">Get in Touch</h2><div class="gold-line mb-16"></div><form action="https://formspree.io/f/xdeownje" method="POST" class="grid md:grid-cols-2 gap-6"><input type="hidden" name="_subject" value="Contact Form Inquiry"><input type="text" name="name" placeholder="Full Name" required class="p-5 rounded-xl text-black"><input type="email" name="email" placeholder="Email Address" required class="p-5 rounded-xl text-black"><input type="tel" name="phone" placeholder="Phone Number" class="p-5 rounded-xl text-black"><input type="text" name="subject" placeholder="Property Interest" class="p-5 rounded-xl text-black"><textarea name="message" rows="4" placeholder="Message" class="md:col-span-2 p-5 rounded-xl text-black"></textarea><button type="submit" class="md:col-span-2 bg-[#c8a96a] text-black py-5 rounded-xl uppercase tracking-[5px] font-semibold hover:bg-[#b39657]">Send Message</button></form></div></section>
-  <a href="https://wa.me/16478485997?text=Hi%20Reserve,%20I%27m%20interested%20in%20a%20property" target="_blank" rel="noopener noreferrer" class="fixed bottom-8 right-8 bg-green-600 hover:bg-green-700 text-white rounded-full px-5 py-3 shadow-lg flex items-center gap-3 z-50"><div class="font-semibold">WhatsApp</div><div class="text-sm">+1 (647) 848-5997</div></a>
-  <footer class="bg-black text-gray-400 text-center py-12"><div class="text-white text-2xl tracking-[8px] mb-5">RESERVE.REALESTATE</div><p>Luxury Real Estate Collection</p><p class="mt-5">© 2026 Reserve.RealEstate All Rights Reserved.</p></footer>
-
-  <script>
-    function openModal(modalId){document.getElementById(modalId).classList.add('active');}
-    function closeModal(modalId){document.getElementById(modalId).classList.remove('active');}
-    function switchModal(closeId, openId){closeModal(closeId);openModal(openId);}
-    document.getElementById('loginBtn').addEventListener('click', () => openModal('loginModal'));
-    document.getElementById('signupBtn').addEventListener('click', () => openModal('signupModal'));
-    document.getElementById('logoutBtn').addEventListener('click', () => {localStorage.removeItem('userEmail');location.reload();});
-    document.getElementById('dashboardBtn').addEventListener('click', () => {window.location.href = 'dashboard.html';});
-    window.addEventListener('click', (e) => {if(e.target.classList.contains('modal')){e.target.classList.remove('active');}});
-    window.addEventListener('DOMContentLoaded', () => {
-      const userEmail = localStorage.getItem('userEmail');
-      if(userEmail){document.getElementById('loginBtn').style.display = 'none';document.getElementById('signupBtn').style.display = 'none';document.getElementById('dashboardBtn').style.display = 'block';document.getElementById('logoutBtn').style.display = 'block';}
-      document.getElementById('loginForm').addEventListener('submit', (e) => {e.preventDefault();const email = new FormData(e.target).get('email');localStorage.setItem('userEmail', email);closeModal('loginModal');location.reload();});
-      document.getElementById('signupForm').addEventListener('submit', (e) => {e.preventDefault();const email = new FormData(e.target).get('email');localStorage.setItem('userEmail', email);closeModal('signupModal');location.reload();});
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {anchor.addEventListener('click', function(e){e.preventDefault();const target = document.querySelector(this.getAttribute('href'));if(target) target.scrollIntoView({behavior:'smooth'});});});
-      loadFeatured();
-    });
-    function applyFilters(){const location = document.getElementById('location').value;const type = document.getElementById('type').value;const purpose = document.getElementById('purpose').value;const beds = document.getElementById('beds').value;const params = new URLSearchParams();if(location) params.append('location', location);if(type) params.append('type', type);if(purpose) params.append('purpose', purpose);if(beds) params.append('beds', beds);window.location.href = 'map.html?' + params.toString();}
-    async function loadFeatured(){try{const featured = document.getElementById('featured');featured.innerHTML = `
-      <article class="group rounded-lg border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition">
-        <a href="/en/property/cocotal-golf-villa" class="block relative">
-          <div class="relative aspect-[4/3] bg-gray-100 overflow-hidden">
-            <img src="/api/placeholder/600/450" alt="Cocotal Golf & Country Club Villa" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"/>
-            <div class="absolute top-3 left-3 flex gap-2"><span class="px-2.5 py-1 text-[11px] font-semibold bg-white/95 text-reserve-950 rounded uppercase tracking-wider">For Sale</span><span class="px-2.5 py-1 text-[11px] font-semibold bg-[#c8a96a] text-white rounded uppercase tracking-wider">Exclusive</span></div>
-          </div>
-          <div class="p-4"><p class="text-xl font-bold text-reserve-950">$380,000 <span class="text-xs font-normal text-gray-500">USD</span></p><h3 class="mt-1 text-base font-semibold text-reserve-900 group-hover:text-[#c8a96a] transition line-clamp-1">2BR Modern Villa — Golf & Country Club</h3><p class="text-xs text-gray-500">Punta Cana, Dominican Republic</p><div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600"><span>2 Beds</span><span>•</span><span>2 Baths</span><span>•</span><span>145 m²</span></div></div>
-        </a>
-      </article>
-      <article class="group rounded-lg border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition">
-        <a href="/en/property/los-corales-beachfront" class="block relative">
-          <div class="relative aspect-[4/3] bg-gray-100 overflow-hidden">
-            <img src="/api/placeholder/600/450" alt="Los Corales Condo" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"/>
-            <div class="absolute top-3 left-3"><span class="px-2.5 py-1 text-[11px] font-semibold bg-white/95 text-reserve-950 rounded uppercase tracking-wider">For Sale</span></div>
-          </div>
-          <div class="p-4"><p class="text-xl font-bold text-reserve-950">$295,000 <span class="text-xs font-normal text-gray-500">USD</span></p><h3 class="mt-1 text-base font-semibold text-reserve-900 group-hover:text-[#c8a96a] transition line-clamp-1">Beachside Condo — Los Corales</h3><p class="text-xs text-gray-500">Bávaro, Dominican Republic</p><div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600"><span>2 Beds</span><span>•</span><span>2 Baths</span><span>•</span><span>110 m²</span></div></div>
-        </a>
-      </article>
-      <article class="group rounded-lg border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition">
-        <a href="/en/property/el-cortecito-residence" class="block relative">
-          <div class="relative aspect-[4/3] bg-gray-100 overflow-hidden">
-            <img src="/api/placeholder/600/450" alt="El Cortecito Residence" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"/>
-            <div class="absolute top-3 left-3"><span class="px-2.5 py-1 text-[11px] font-semibold bg-white/95 text-reserve-950 rounded uppercase tracking-wider">For Sale</span></div>
-          </div>
-          <div class="p-4"><p class="text-xl font-bold text-reserve-950">$240,000 <span class="text-xs font-normal text-gray-500">USD</span></p><h3 class="mt-1 text-base font-semibold text-reserve-900 group-hover:text-[#c8a96a] transition line-clamp-1">Ground Floor Poolside Condo</h3><p class="text-xs text-gray-500">El Cortecito, Dominican Republic</p><div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600"><span>2 Beds</span><span>•</span><span>2 Baths</span><span>•</span><span>98 m²</span></div></div>
-        </a>
-      </article>
-      <article class="group rounded-lg border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition">
-        <a href="/en/property/penthouse-los-corales" class="block relative">
-          <div class="relative aspect-[4/3] bg-gray-100 overflow-hidden">
-            <img src="/api/placeholder/600/450" alt="Luxury Penthouse" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"/>
-            <div class="absolute top-3 left-3"><span class="px-2.5 py-1 text-[11px] font-semibold bg-white/95 text-reserve-950 rounded uppercase tracking-wider">New</span></div>
-          </div>
-          <div class="p-4"><p class="text-xl font-bold text-reserve-950">$450,000 <span class="text-xs font-normal text-gray-500">USD</span></p><h3 class="mt-1 text-base font-semibold text-reserve-900 group-hover:text-[#c8a96a] transition line-clamp-1">Penthouse with Private Terrace</h3><p class="text-xs text-gray-500">Los Corales, Dominican Republic</p><div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600"><span>3 Beds</span><span>•</span><span>3 Baths</span><span>•</span><span>210 m²</span></div></div>
-        </a>
-      </article>`;}catch(err){console.error('Error loading properties:', err);}}
-    function toggleSave(propertyId){const userEmail = localStorage.getItem('userEmail');if(!userEmail){openModal('loginModal');return;}let saved = JSON.parse(localStorage.getItem('savedListings')) || [];if(saved.includes(propertyId)){saved = saved.filter(id => id !== propertyId);document.getElementById(`heart-${propertyId}`).style.fill = 'none';} else {saved.push(propertyId);document.getElementById(`heart-${propertyId}`).style.fill = 'currentColor';}localStorage.setItem('savedListings', JSON.stringify(saved));}
-  </script>
 </body>
 </html>
