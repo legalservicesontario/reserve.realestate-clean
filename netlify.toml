@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# NOTE: The problematic redirect rule has been removed.
+# All HTML files will be served directly without conflicts.
+# For client-side routing, use history API in your JavaScript.
