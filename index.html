@@ -75,22 +75,107 @@
       background:var(--gold);
       margin:auto;
     }
-    input,textarea{
+    input,textarea,select{
       font-family:'Inter',sans-serif;
+    }
+    .modal{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.5);
+      z-index:1000;
+      justify-content:center;
+      align-items:center;
+    }
+    .modal.active{
+      display:flex;
+    }
+    .modal-content{
+      background:white;
+      border-radius:20px;
+      padding:40px;
+      max-width:500px;
+      width:90%;
+      position:relative;
+    }
+    .close-modal{
+      position:absolute;
+      top:20px;
+      right:20px;
+      background:none;
+      border:none;
+      font-size:28px;
+      cursor:pointer;
+      color:#666;
+    }
+    .nav-header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:100;
+      background:white/95;
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #e5e7eb;
+    }
+    .hero{
+      margin-top:80px;
     }
   </style>
 </head>
 <body>
-  <!-- NAVIGATION -->
-  <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-8 text-white bg-black/30 backdrop-blur-sm">
+  <!-- HEADER/NAVIGATION -->
+  <nav class="nav-header flex justify-between items-center px-8 py-4">
     <div class="text-2xl tracking-[8px] font-bold">RESERVE.REALESTATE</div>
     <div class="hidden md:flex gap-10 uppercase tracking-widest text-sm">
-      <a href="#properties">Properties</a>
-      <a href="map.html">Map</a>
-      <a href="commercial.html">Commercial</a>
-      <a href="#contact">Contact</a>
+      <a href="#properties" class="hover:text-[#c8a96a] transition">Properties</a>
+      <a href="map.html" class="hover:text-[#c8a96a] transition">Map</a>
+      <a href="commercial.html" class="hover:text-[#c8a96a] transition">Commercial</a>
+      <a href="#contact" class="hover:text-[#c8a96a] transition">Contact</a>
+    </div>
+    <div class="flex gap-4 items-center">
+      <button id="loginBtn" class="px-4 py-2 text-sm font-semibold text-[#0b0b0b] hover:text-[#c8a96a] transition">Login</button>
+      <button id="signupBtn" class="px-4 py-2 text-sm font-semibold bg-[#c8a96a] text-black rounded-lg hover:bg-[#b39657] transition">Sign Up</button>
+      <button id="dashboardBtn" style="display:none;" class="px-4 py-2 text-sm font-semibold bg-[#c8a96a] text-black rounded-lg hover:bg-[#b39657] transition">Dashboard</button>
+      <button id="logoutBtn" style="display:none;" class="px-4 py-2 text-sm font-semibold text-red-600 hover:text-red-800 transition">Logout</button>
     </div>
   </nav>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
+      <h2 class="text-3xl font-bold mb-6">Login</h2>
+      <form id="loginForm" action="https://formspree.io/f/xdeownje" method="POST" class="grid gap-4">
+        <input type="hidden" name="_subject" value="User Login Request">
+        <input type="email" name="email" placeholder="Email Address" required class="p-3 border rounded-lg">
+        <input type="password" name="password" placeholder="Password" required class="p-3 border rounded-lg">
+        <button type="submit" class="p-3 bg-[#c8a96a] text-black font-semibold rounded-lg hover:bg-[#b39657]">Login</button>
+      </form>
+      <p class="text-center mt-4 text-sm">Don't have an account? <button onclick="switchModal('loginModal', 'signupModal')" class="text-[#c8a96a] font-semibold hover:underline">Sign Up</button></p>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('signupModal')">&times;</button>
+      <h2 class="text-3xl font-bold mb-6">Create Account</h2>
+      <form id="signupForm" action="https://formspree.io/f/xdeownje" method="POST" class="grid gap-4">
+        <input type="hidden" name="_subject" value="New User Registration">
+        <input type="text" name="full_name" placeholder="Full Name" required class="p-3 border rounded-lg">
+        <input type="email" name="email" placeholder="Email Address" required class="p-3 border rounded-lg">
+        <input type="tel" name="phone" placeholder="Phone Number" class="p-3 border rounded-lg">
+        <input type="password" name="password" placeholder="Password" required class="p-3 border rounded-lg">
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required class="p-3 border rounded-lg">
+        <button type="submit" class="p-3 bg-[#c8a96a] text-black font-semibold rounded-lg hover:bg-[#b39657]">Create Account</button>
+      </form>
+      <p class="text-center mt-4 text-sm">Already have an account? <button onclick="switchModal('signupModal', 'loginModal')" class="text-[#c8a96a] font-semibold hover:underline">Login</button></p>
+    </div>
+  </div>
 
   <!-- HERO SECTION -->
   <section class="hero text-white">
@@ -103,7 +188,43 @@
           <p class="gold uppercase text-sm">Locations</p>
           <p class="text-xl mt-2">Tamarindo (CR) • Cabarete • Sosúa • Puerto Plata (DR)</p>
         </div>
-        <a href="#properties" class="inline-block bg-white text-black px-10 py-5 rounded-full uppercase tracking-widest hover:bg-gray-200">Explore Properties</a>
+        <a href="#search" class="inline-block bg-white text-black px-10 py-5 rounded-full uppercase tracking-widest hover:bg-gray-200">Start Searching</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH & FILTER SECTION -->
+  <section id="search" class="bg-white py-12 border-b">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="text-3xl font-bold mb-8">Find Your Dream Property</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <select id="location" class="p-3 border rounded-lg bg-white">
+          <option value="">All Locations</option>
+          <option value="tamarindo">Tamarindo, Costa Rica</option>
+          <option value="cabarete">Cabarete, Dominican Republic</option>
+          <option value="sosua">Sosúa, Dominican Republic</option>
+          <option value="puerto-plata">Puerto Plata, Dominican Republic</option>
+        </select>
+        <select id="type" class="p-3 border rounded-lg bg-white">
+          <option value="">All Types</option>
+          <option value="villa">Villa</option>
+          <option value="condo">Condo</option>
+          <option value="penthouse">Penthouse</option>
+          <option value="land">Land</option>
+        </select>
+        <select id="purpose" class="p-3 border rounded-lg bg-white">
+          <option value="">For Sale or Rent</option>
+          <option value="sale">For Sale</option>
+          <option value="rent">For Rent</option>
+        </select>
+        <select id="beds" class="p-3 border rounded-lg bg-white">
+          <option value="">Any Bedrooms</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+        </select>
+        <button onclick="applyFilters()" class="p-3 bg-[#c8a96a] text-black font-semibold rounded-lg hover:bg-[#b39657] transition">Search</button>
       </div>
     </div>
   </section>
@@ -123,12 +244,13 @@
       <h2 class="text-5xl text-center mb-6">Get in Touch</h2>
       <div class="gold-line mb-16"></div>
       <form action="https://formspree.io/f/xdeownje" method="POST" class="grid md:grid-cols-2 gap-6">
+        <input type="hidden" name="_subject" value="Contact Form Inquiry">
         <input type="text" name="name" placeholder="Full Name" required class="p-5 rounded-xl text-black">
         <input type="email" name="email" placeholder="Email Address" required class="p-5 rounded-xl text-black">
         <input type="tel" name="phone" placeholder="Phone Number" class="p-5 rounded-xl text-black">
         <input type="text" name="subject" placeholder="Property Interest" class="p-5 rounded-xl text-black">
         <textarea name="message" rows="4" placeholder="Message" class="md:col-span-2 p-5 rounded-xl text-black"></textarea>
-        <button type="submit" class="md:col-span-2 bg-[#c8a96a] text-black py-5 rounded-xl uppercase tracking-[5px] font-semibold">Send Message</button>
+        <button type="submit" class="md:col-span-2 bg-[#c8a96a] text-black py-5 rounded-xl uppercase tracking-[5px] font-semibold hover:bg-[#b39657]">Send Message</button>
       </form>
     </div>
   </section>
@@ -147,14 +269,91 @@
   </footer>
 
   <script>
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e){
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target) target.scrollIntoView({behavior:'smooth'});
-      });
+    // Modal Functions
+    function openModal(modalId){
+      document.getElementById(modalId).classList.add('active');
+    }
+    function closeModal(modalId){
+      document.getElementById(modalId).classList.remove('active');
+    }
+    function switchModal(closeId, openId){
+      closeModal(closeId);
+      openModal(openId);
+    }
+
+    // Modal Button Events
+    document.getElementById('loginBtn').addEventListener('click', () => openModal('loginModal'));
+    document.getElementById('signupBtn').addEventListener('click', () => openModal('signupModal'));
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('userEmail');
+      location.reload();
     });
+    document.getElementById('dashboardBtn').addEventListener('click', () => {
+      window.location.href = 'dashboard.html';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if(e.target.classList.contains('modal')){
+        e.target.classList.remove('active');
+      }
+    });
+
+    // Check login status on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const userEmail = localStorage.getItem('userEmail');
+      if(userEmail){
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('signupBtn').style.display = 'none';
+        document.getElementById('dashboardBtn').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'block';
+      }
+
+      // Handle login/signup forms
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = new FormData(e.target).get('email');
+        localStorage.setItem('userEmail', email);
+        closeModal('loginModal');
+        location.reload();
+      });
+
+      document.getElementById('signupForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = new FormData(e.target).get('email');
+        localStorage.setItem('userEmail', email);
+        closeModal('signupModal');
+        location.reload();
+      });
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e){
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if(target) target.scrollIntoView({behavior:'smooth'});
+        });
+      });
+
+      // Load featured properties
+      loadFeatured();
+    });
+
+    // Search and Filter
+    function applyFilters(){
+      const location = document.getElementById('location').value;
+      const type = document.getElementById('type').value;
+      const purpose = document.getElementById('purpose').value;
+      const beds = document.getElementById('beds').value;
+      
+      const params = new URLSearchParams();
+      if(location) params.append('location', location);
+      if(type) params.append('type', type);
+      if(purpose) params.append('purpose', purpose);
+      if(beds) params.append('beds', beds);
+      
+      window.location.href = 'map.html?' + params.toString();
+    }
 
     // Load featured properties
     async function loadFeatured(){
@@ -164,8 +363,13 @@
         const featured = document.getElementById('featured');
         const properties = data.listings.slice(0, 6);
         featured.innerHTML = properties.map(p => `
-          <div class="card overflow-hidden hover:shadow-2xl transition-all">
-            <img src="${p.images[0]}" alt="${p.title}" class="w-full h-64 object-cover">
+          <div class="card overflow-hidden hover:shadow-2xl transition-all group">
+            <div class="relative h-64 overflow-hidden">
+              <img src="${p.images[0]}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+              <button onclick="toggleSave('${p.id}')" class="absolute top-4 right-4 bg-white/90 backdrop-blur p-2 rounded-full hover:bg-[#c8a96a] transition" title="Save listing">
+                <svg id="heart-${p.id}" class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+              </button>
+            </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">${p.title}</h3>
               <p class="gold uppercase text-sm mb-3">${p.location}</p>
@@ -175,7 +379,7 @@
                 <span>🚿 ${p.baths} Baths</span>
                 <span>📐 ${p.area_m2}m²</span>
               </div>
-              <a href="property.html?id=${p.id}" class="block w-full bg-[#c8a96a] text-black text-center py-3 rounded-lg hover:bg-[#b39657] uppercase tracking-wider text-sm font-semibold">View Property</a>
+              <a href="property.html?id=${p.id}" class="block w-full bg-[#c8a96a] text-black text-center py-3 rounded-lg hover:bg-[#b39657] uppercase tracking-wider text-sm font-semibold transition">View Property</a>
             </div>
           </div>
         `).join('');
@@ -183,7 +387,25 @@
         console.error('Error loading properties:', err);
       }
     }
-    loadFeatured();
+
+    // Save/Unsave listings
+    function toggleSave(propertyId){
+      const userEmail = localStorage.getItem('userEmail');
+      if(!userEmail){
+        openModal('loginModal');
+        return;
+      }
+      
+      let saved = JSON.parse(localStorage.getItem('savedListings')) || [];
+      if(saved.includes(propertyId)){
+        saved = saved.filter(id => id !== propertyId);
+        document.getElementById(`heart-${propertyId}`).style.fill = 'none';
+      } else {
+        saved.push(propertyId);
+        document.getElementById(`heart-${propertyId}`).style.fill = 'currentColor';
+      }
+      localStorage.setItem('savedListings', JSON.stringify(saved));
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard | Reserve.RealEstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#c8a96a;--cream:#f8f6f0;}
+    body{margin:0;background:var(--cream);color:#111;font-family:'Inter',sans-serif;}
+    h1,h2{font-family:'Cormorant Garamond',serif;}
+    .gold{color:var(--gold);}
+    .card{background:white;border-radius:20px;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:20px;}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="bg-white border-b sticky top-0 z-40 flex justify-between items-center px-8 py-4 shadow-md">
+    <a href="index.html" class="text-2xl font-bold">RESERVE<span class="gold">REALESTATE</span></a>
+    <div class="flex gap-4 items-center">
+      <span id="userDisplay" class="text-sm text-gray-600"></span>
+      <button onclick="logout()" class="px-4 py-2 text-sm font-semibold text-red-600 hover:text-red-800 transition">Logout</button>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-8 py-12">
+    <!-- TABS -->
+    <div class="flex gap-6 mb-8 border-b">
+      <button onclick="showTab('saved')" class="py-3 px-4 font-semibold border-b-2 border-[#c8a96a] text-[#c8a96a]">Saved Listings</button>
+      <button onclick="showTab('profile')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">My Profile</button>
+      <button onclick="showTab('messages')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">Messages</button>
+    </div>
+
+    <!-- SAVED LISTINGS TAB -->
+    <div id="saved-tab" class="tab-content">
+      <h2 class="text-3xl font-bold mb-8">My Saved Properties</h2>
+      <div id="savedListings" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <div id="profile-tab" class="tab-content" style="display:none;">
+      <h2 class="text-3xl font-bold mb-8">My Profile</h2>
+      <div class="card max-w-2xl">
+        <div id="profileContent" class="space-y-4">
+          <p class="text-gray-600">Loading profile...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MESSAGES TAB -->
+    <div id="messages-tab" class="tab-content" style="display:none;">
+      <h2 class="text-3xl font-bold mb-8">Messages</h2>
+      <div class="card">
+        <p class="text-gray-600">No messages yet. Inquire about properties to start conversations with agents.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check if user is logged in
+    window.addEventListener('DOMContentLoaded', () => {
+      const userEmail = localStorage.getItem('userEmail');
+      if(!userEmail){
+        window.location.href = 'index.html';
+        return;
+      }
+
+      document.getElementById('userDisplay').textContent = `Welcome, ${userEmail}`;
+      loadSavedListings();
+      loadProfile();
+    });
+
+    function showTab(tabName){
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('button').forEach(el => el.classList.remove('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]'));
+      
+      // Show selected tab
+      document.getElementById(tabName + '-tab').style.display = 'block';
+      event.target.classList.add('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]');
+    }
+
+    async function loadSavedListings(){
+      try{
+        const saved = JSON.parse(localStorage.getItem('savedListings')) || [];
+        if(saved.length === 0){
+          document.getElementById('savedListings').innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html#properties" class="text-[#c8a96a] font-semibold">Browse properties</a></p>';
+          return;
+        }
+
+        const res = await fetch('data/properties.json');
+        const data = await res.json();
+        const savedListings = document.getElementById('savedListings');
+        
+        const properties = data.listings.filter(p => saved.includes(p.id));
+        savedListings.innerHTML = properties.map(p => `
+          <div class="card overflow-hidden hover:shadow-lg transition">
+            <img src="${p.images[0]}" alt="${p.title}" class="w-full h-48 object-cover rounded-lg mb-4">
+            <h3 class="text-xl font-semibold mb-2">${p.title}</h3>
+            <p class="text-[#c8a96a] uppercase text-sm mb-3">${p.location}</p>
+            <p class="text-2xl font-bold mb-4">$${p.price.toLocaleString()}</p>
+            <div class="flex gap-4">
+              <a href="property.html?id=${p.id}" class="flex-1 bg-[#c8a96a] text-black text-center py-2 rounded-lg hover:bg-[#b39657] font-semibold">View</a>
+              <button onclick="removeSaved('${p.id}')" class="flex-1 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 font-semibold">Remove</button>
+            </div>
+          </div>
+        `).join('');
+      }catch(err){
+        console.error('Error loading saved listings:', err);
+      }
+    }
+
+    function removeSaved(propertyId){
+      let saved = JSON.parse(localStorage.getItem('savedListings')) || [];
+      saved = saved.filter(id => id !== propertyId);
+      localStorage.setItem('savedListings', JSON.stringify(saved));
+      loadSavedListings();
+    }
+
+    function loadProfile(){
+      const userEmail = localStorage.getItem('userEmail');
+      const profileContent = document.getElementById('profileContent');
+      profileContent.innerHTML = `
+        <p class="text-sm text-gray-600"><strong>Email:</strong> ${userEmail}</p>
+        <p class="text-sm text-gray-600"><strong>Member Since:</strong> ${new Date().toLocaleDateString()}</p>
+        <p class="text-sm text-gray-600"><strong>Saved Properties:</strong> ${JSON.parse(localStorage.getItem('savedListings') || '[]').length}</p>
+      `;
+    }
+
+    function logout(){
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('savedListings');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
