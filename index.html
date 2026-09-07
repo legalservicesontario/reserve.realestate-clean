@@ -15,6 +15,7 @@
       --gold:#c8a96a;
       --cream:#f8f6f0;
       --dark:#0b0b0b;
+      --navy:#0b1f3a;
     }
     body{
       margin:0;
@@ -74,6 +75,27 @@
       height:3px;
       background:var(--gold);
       margin:auto;
+    }
+    .badge{
+      position:absolute;
+      top:16px;
+      left:16px;
+      background:var(--navy);
+      color:var(--gold);
+      padding:6px 16px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .badge.exclusive{
+      background:var(--gold);
+      color:var(--navy);
+    }
+    .badge.new{
+      background:#1e7a4c;
+      color:#fff;
     }
     input,textarea,select{
       font-family:'Inter',sans-serif;
@@ -232,8 +254,9 @@
   <!-- FEATURED PROPERTIES -->
   <section id="properties" class="max-w-7xl mx-auto px-8 py-28">
     <div class="text-center mb-16">
-      <h2 class="text-5xl">Featured Properties</h2>
+      <h2 class="text-5xl">Featured Properties &amp; Residences</h2>
       <div class="gold-line mt-6"></div>
+      <p id="featured-count" class="text-gray-600 mt-6 uppercase tracking-widest text-sm">Showing luxury properties</p>
     </div>
     <div id="featured" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </section>
@@ -361,20 +384,22 @@
         const res = await fetch('data/properties.json');
         const data = await res.json();
         const featured = document.getElementById('featured');
-        const properties = data.listings.slice(0, 6);
+        const properties = data.listings.slice(0, 5);
+        document.getElementById('featured-count').textContent = `Showing ${properties.length} luxury properties`;
         featured.innerHTML = properties.map(p => `
           <div class="card overflow-hidden hover:shadow-2xl transition-all group">
             <div class="relative h-64 overflow-hidden">
               <img src="${p.images[0]}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+              ${p.badge ? `<span class="badge ${p.badge.toLowerCase().replace(/\s+/g, '-')}">${p.badge}</span>` : ''}
               <button onclick="toggleSave('${p.id}')" class="absolute top-4 right-4 bg-white/90 backdrop-blur p-2 rounded-full hover:bg-[#c8a96a] transition" title="Save listing">
                 <svg id="heart-${p.id}" class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
               </button>
             </div>
             <div class="p-6">
+              <p class="text-2xl font-bold mb-2">$${p.price.toLocaleString()}${p.saleOrRent=='rent' ? '<span class="text-sm font-normal text-gray-500">/mo</span>' : ''}</p>
               <h3 class="text-xl font-semibold mb-2">${p.title}</h3>
-              <p class="gold uppercase text-sm mb-3">${p.location}</p>
-              <p class="text-2xl font-bold mb-4">$${p.price.toLocaleString()}</p>
-              <div class="flex gap-2 text-sm text-gray-600 mb-4">
+              <p class="gold uppercase text-sm mb-4">${p.location}</p>
+              <div class="flex gap-4 text-sm text-gray-600 mb-4 border-t pt-4">
                 <span>🛏️ ${p.beds} Beds</span>
                 <span>🚿 ${p.baths} Baths</span>
                 <span>📐 ${p.area_m2}m²</span>
