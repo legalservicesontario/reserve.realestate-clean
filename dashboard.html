@@ -1,63 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Dashboard | Reserve.RealEstate</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Dashboard — Reserve.RealEstate</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            harbor: {
+              50: '#f4f6f8', 100: '#e5e9ee', 200: '#cbd4e0', 300: '#a2b2c8',
+              400: '#738ba9', 500: '#516d8e', 600: '#3e5473', 700: '#33445e',
+              800: '#2d3a4e', 900: '#293243', 950: '#0f141c',
+            },
+            tide: {
+              50: '#f0fdfa', 300: '#5eead4', 400: '#2dd4bf', 700: '#0f766e', 800: '#115e59',
+            },
+            coral: { 300: '#fca5a5', 700: '#b91c1c' },
+            sand: { 50: '#fbfaf8' }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root{--gold:#c8a96a;--cream:#f8f6f0;}
-    body{margin:0;background:var(--cream);color:#111;font-family:'Inter',sans-serif;}
-    h1,h2{font-family:'Cormorant Garamond',serif;}
-    .gold{color:var(--gold);}
-    .card{background:white;border-radius:20px;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:20px;}
+    .card{background:white;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,0.06);border:1px solid #e5e9ee;padding:20px;}
   </style>
 </head>
-<body>
-  <!-- HEADER -->
-  <nav class="bg-white border-b sticky top-0 z-40 flex justify-between items-center px-8 py-4 shadow-md">
-    <a href="index.html" class="text-2xl font-bold">RESERVE<span class="gold">REALESTATE</span></a>
-    <div class="flex gap-4 items-center">
-      <span id="userDisplay" class="text-sm text-gray-600"></span>
-      <button onclick="logout()" class="px-4 py-2 text-sm font-semibold text-red-600 hover:text-red-800 transition">Logout</button>
-    </div>
-  </nav>
+<body class="min-h-screen flex flex-col font-sans bg-sand-50 text-harbor-900">
 
-  <div class="max-w-6xl mx-auto px-8 py-12">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-harbor-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 gap-4">
+      <a class="flex items-center gap-2 shrink-0 font-extrabold text-xl tracking-wider text-harbor-950 uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded" href="index.html">
+        RESERVE<span class="text-tide-700">.REAL ESTATE</span>
+      </a>
+      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="index.html">Home</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="map.html">Map</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="commercial.html">Commercial</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="agents.html">Agents</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="post-property.html">List Your Property</a>
+        <a class="px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="dashboard.html" aria-current="page">Dashboard</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <span id="userDisplay" class="hidden sm:inline text-sm text-harbor-600"></span>
+        <button onclick="logout()" class="px-4 py-2 text-sm font-semibold text-coral-700 hover:text-red-800 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded-lg">Logout</button>
+        <button id="mobile-menu-btn" type="button" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-harbor-200 text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"></path></svg>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-menu" aria-label="Mobile navigation" class="hidden md:hidden border-t border-harbor-100 bg-white px-4 pb-4 pt-2 space-y-1 text-sm font-medium">
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="index.html">Home</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="map.html">Map</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="commercial.html">Commercial</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="agents.html">Agents</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="post-property.html">List Your Property</a>
+      <a class="block px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50" href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <div class="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-8 py-12">
     <!-- TABS -->
-    <div class="flex gap-6 mb-8 border-b">
-      <button onclick="showTab('saved')" class="py-3 px-4 font-semibold border-b-2 border-[#c8a96a] text-[#c8a96a]">Saved Listings</button>
-      <button onclick="showTab('profile')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">My Profile</button>
-      <button onclick="showTab('messages')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">Messages</button>
+    <div class="flex gap-6 mb-8 border-b border-harbor-100" role="tablist" aria-label="Dashboard sections">
+      <button onclick="showTab('saved')" class="py-3 px-4 font-semibold border-b-2 border-tide-700 text-tide-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded-t-lg">Saved Listings</button>
+      <button onclick="showTab('profile')" class="py-3 px-4 font-semibold text-harbor-600 hover:text-tide-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded-t-lg">My Profile</button>
+      <button onclick="showTab('messages')" class="py-3 px-4 font-semibold text-harbor-600 hover:text-tide-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded-t-lg">Messages</button>
     </div>
 
     <!-- SAVED LISTINGS TAB -->
     <div id="saved-tab" class="tab-content">
-      <h2 class="text-3xl font-bold mb-8">My Saved Properties</h2>
+      <h2 class="text-2xl font-bold text-harbor-900 mb-6">My Saved Properties</h2>
       <div id="savedListings" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
 
     <!-- PROFILE TAB -->
     <div id="profile-tab" class="tab-content" style="display:none;">
-      <h2 class="text-3xl font-bold mb-8">My Profile</h2>
+      <h2 class="text-2xl font-bold text-harbor-900 mb-6">My Profile</h2>
       <div class="card max-w-2xl">
         <div id="profileContent" class="space-y-4">
-          <p class="text-gray-600">Loading profile...</p>
+          <p class="text-harbor-600">Loading profile...</p>
         </div>
       </div>
     </div>
 
     <!-- MESSAGES TAB -->
     <div id="messages-tab" class="tab-content" style="display:none;">
-      <h2 class="text-3xl font-bold mb-8">Messages</h2>
+      <h2 class="text-2xl font-bold text-harbor-900 mb-6">Messages</h2>
       <div class="card">
-        <p class="text-gray-600">No messages yet. Inquire about properties to start conversations with agents.</p>
+        <p class="text-harbor-600">No messages yet. Inquire about properties to start conversations with agents.</p>
       </div>
     </div>
   </div>
 
+  <a href="https://wa.me/16478485997?text=Hi%20Reserve.RealEstate" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 flex items-center gap-2 bg-tide-700 hover:bg-tide-800 text-white pl-4 pr-5 py-3 rounded-full shadow-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-900">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.18-3.01.79.8-2.94-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8Z"></path></svg>
+    <span class="font-semibold text-sm">WhatsApp</span>
+  </a>
+
+  <footer class="bg-harbor-950 text-white py-8 border-t border-harbor-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-harbor-400">
+      <p>© 2026 RESERVE.REAL ESTATE — Dominican Republic & Costa Rica Luxury Real Estate.</p>
+      <div class="flex gap-4">
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="index.html">Home</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="map.html">Map</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="agents.html">Agents</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="post-property.html">List Property</a>
+      </div>
+    </div>
+  </footer>
+
   <script>
+    (function () {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', function () {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          menu.classList.toggle('hidden');
+        });
+      }
+    })();
+
     // Check if user is logged in
     window.addEventListener('DOMContentLoaded', () => {
       const userEmail = localStorage.getItem('userEmail');
@@ -71,38 +139,39 @@
       loadProfile();
     });
 
-    function showTab(tabName){
+    function showTab(tabName, event){
       // Hide all tabs
       document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('button').forEach(el => el.classList.remove('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]'));
-      
+      document.querySelectorAll('[role="tablist"] button').forEach(el => el.classList.remove('border-b-2', 'border-tide-700', 'text-tide-700'));
+
       // Show selected tab
       document.getElementById(tabName + '-tab').style.display = 'block';
-      event.target.classList.add('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]');
+      const target = (event && event.target) || document.activeElement;
+      if (target) target.classList.add('border-b-2', 'border-tide-700', 'text-tide-700');
     }
 
     async function loadSavedListings(){
       try{
         const saved = JSON.parse(localStorage.getItem('savedListings')) || [];
         if(saved.length === 0){
-          document.getElementById('savedListings').innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html#properties" class="text-[#c8a96a] font-semibold">Browse properties</a></p>';
+          document.getElementById('savedListings').innerHTML = '<p class="text-harbor-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html#properties" class="text-tide-700 font-semibold">Browse properties</a></p>';
           return;
         }
 
         const res = await fetch('data/properties.json');
         const data = await res.json();
         const savedListings = document.getElementById('savedListings');
-        
+
         const properties = data.listings.filter(p => saved.includes(p.id));
         savedListings.innerHTML = properties.map(p => `
-          <div class="card overflow-hidden hover:shadow-lg transition">
-            <img src="${p.images[0]}" alt="${p.title}" class="w-full h-48 object-cover rounded-lg mb-4">
-            <h3 class="text-xl font-semibold mb-2">${p.title}</h3>
-            <p class="text-[#c8a96a] uppercase text-sm mb-3">${p.location}</p>
-            <p class="text-2xl font-bold mb-4">$${p.price.toLocaleString()}</p>
+          <div class="card overflow-hidden hover:shadow-md transition">
+            <img src="${(p.images && p.images[0]) || ''}" alt="${p.title}" class="w-full h-48 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-harbor-900 mb-2">${p.title}</h3>
+            <p class="text-tide-700 uppercase text-sm mb-3">${p.location}</p>
+            <p class="text-2xl font-bold text-harbor-900 mb-4">$${Number(p.price).toLocaleString()}</p>
             <div class="flex gap-4">
-              <a href="property.html?id=${p.id}" class="flex-1 bg-[#c8a96a] text-black text-center py-2 rounded-lg hover:bg-[#b39657] font-semibold">View</a>
-              <button onclick="removeSaved('${p.id}')" class="flex-1 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 font-semibold">Remove</button>
+              <a href="property.html?id=${encodeURIComponent(p.id)}" class="flex-1 bg-tide-700 text-white text-center py-2 rounded-lg hover:bg-tide-800 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-900">View</a>
+              <button onclick="removeSaved('${p.id}')" class="flex-1 border-2 border-coral-700 text-coral-700 rounded-lg hover:bg-red-50 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">Remove</button>
             </div>
           </div>
         `).join('');
@@ -122,9 +191,9 @@
       const userEmail = localStorage.getItem('userEmail');
       const profileContent = document.getElementById('profileContent');
       profileContent.innerHTML = `
-        <p class="text-sm text-gray-600"><strong>Email:</strong> ${userEmail}</p>
-        <p class="text-sm text-gray-600"><strong>Member Since:</strong> ${new Date().toLocaleDateString()}</p>
-        <p class="text-sm text-gray-600"><strong>Saved Properties:</strong> ${JSON.parse(localStorage.getItem('savedListings') || '[]').length}</p>
+        <p class="text-sm text-harbor-600"><strong>Email:</strong> ${userEmail}</p>
+        <p class="text-sm text-harbor-600"><strong>Member Since:</strong> ${new Date().toLocaleDateString()}</p>
+        <p class="text-sm text-harbor-600"><strong>Saved Properties:</strong> ${JSON.parse(localStorage.getItem('savedListings') || '[]').length}</p>
       `;
     }
 

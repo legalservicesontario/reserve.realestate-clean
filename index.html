@@ -38,30 +38,42 @@
 
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-harbor-100">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 gap-4">
-      <a class="flex items-center gap-2 shrink-0 font-extrabold text-xl tracking-wider text-harbor-950 uppercase" href="index.html">
+      <a class="flex items-center gap-2 shrink-0 font-extrabold text-xl tracking-wider text-harbor-950 uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded" href="index.html">
         RESERVE<span class="text-tide-700">.REAL ESTATE</span>
       </a>
       <nav aria-label="Main navigation" class="hidden md:flex items-center gap-1 text-sm font-medium">
-        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="map.html">Search Properties</a>
-        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="map.html">Map</a>
-        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="commercial.html">Commercial</a>
-        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="agents.html">Agents</a>
-        <a class="px-3 py-2 rounded-lg text-tide-700 hover:bg-tide-50 font-semibold" href="post-property.html">List Your Property</a>
+        <a class="px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="index.html" aria-current="page">Home</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="map.html">Map</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="commercial.html">Commercial</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="agents.html">Agents</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="post-property.html">List Your Property</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="dashboard.html">Dashboard</a>
       </nav>
       <div class="flex items-center gap-2">
-        <label class="relative">
+        <label class="relative hidden sm:block">
           <span class="sr-only">Language</span>
-          <select class="h-9 max-w-28 appearance-none rounded-full border border-harbor-200 bg-white py-1 pl-3 pr-7 text-xs font-semibold text-harbor-800 outline-none hover:border-harbor-300">
+          <select class="h-9 max-w-28 appearance-none rounded-full border border-harbor-200 bg-white py-1 pl-3 pr-7 text-xs font-semibold text-harbor-800 outline-none hover:border-harbor-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
             <option value="en" selected>English</option>
             <option value="es">Español</option>
             <option value="fr">Français</option>
           </select>
           <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-harbor-500">▾</span>
         </label>
-        <a class="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-harbor-700 hover:text-harbor-950" href="dashboard.html">Dashboard</a>
-        <a class="px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors" href="post-property.html">Contact Agent</a>
+        <a class="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-800" href="post-property.html">Contact Agent</a>
+        <button id="mobile-menu-btn" type="button" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-harbor-200 text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"></path></svg>
+        </button>
       </div>
     </div>
+    <nav id="mobile-menu" aria-label="Mobile navigation" class="hidden md:hidden border-t border-harbor-100 bg-white px-4 pb-4 pt-2 space-y-1 text-sm font-medium">
+      <a class="block px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50" href="index.html">Home</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="map.html">Map</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="commercial.html">Commercial</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="agents.html">Agents</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="post-property.html">List Your Property</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="dashboard.html">Dashboard</a>
+    </nav>
   </header>
 
   <main class="flex-1">
@@ -87,125 +99,143 @@
         </p>
 
         <div class="mt-8 max-w-4xl">
-          <form action="map.html" class="bg-white rounded-2xl shadow-xl p-3 sm:p-4 grid gap-3 sm:grid-cols-[1fr_auto_auto_auto_auto] items-center">
+          <form action="map.html" method="get" class="bg-white rounded-2xl shadow-xl p-3 sm:p-4 grid gap-3 sm:grid-cols-[1fr_auto_auto_auto_auto] items-center">
             <div class="relative">
               <label for="home-q" class="sr-only">City, region, or neighborhood…</label>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-harbor-400"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2" stroke-linecap="round"></path></svg>
-              <input id="home-q" placeholder="Punta Cana, Las Terrenas, Tamarindo…" class="w-full border-0 ring-0 pl-10 h-12 text-base text-harbor-900 outline-none" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-harbor-400" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2" stroke-linecap="round"></path></svg>
+              <input id="home-q" name="q" placeholder="Punta Cana, Las Terrenas, Tamarindo…" class="w-full border-0 ring-0 pl-10 h-12 text-base text-harbor-900 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded-lg" />
             </div>
-            
-            <select class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none">
+
+            <label class="sr-only" for="home-max-price">Maximum price</label>
+            <select id="home-max-price" name="maxPrice" class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
               <option value="" selected>Any price</option>
               <option value="1000">≤ $1,000 / mo</option>
               <option value="2500">≤ $2,500 / mo</option>
               <option value="5000">≤ $5,000 / mo</option>
               <option value="10000">≤ $10,000 / mo</option>
             </select>
-            
-            <select class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none">
+
+            <label class="sr-only" for="home-type">Property type</label>
+            <select id="home-type" name="type" class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
               <option value="" selected>Any type</option>
               <option value="villa">Luxury Villa</option>
               <option value="apartment">Apartment</option>
               <option value="condo">Beachfront Condo</option>
               <option value="penthouse">Penthouse</option>
             </select>
-            
-            <select class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none">
+
+            <label class="sr-only" for="home-duration">Duration</label>
+            <select id="home-duration" name="duration" class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
               <option value="" selected>Any duration</option>
               <option value="LONG_TERM">Long term</option>
               <option value="VACATION">Vacation stay</option>
             </select>
-            
-            <button type="submit" class="h-12 px-7 bg-tide-700 hover:bg-tide-800 text-white font-semibold rounded-lg shadow transition-colors">
+
+            <button type="submit" class="h-12 px-7 bg-tide-700 hover:bg-tide-800 text-white font-semibold rounded-lg shadow transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
               Search
             </button>
           </form>
         </div>
 
-        <nav aria-label="Popular right now:" class="mt-5 flex flex-wrap items-center gap-2">
+        <nav aria-label="Popular destinations" class="mt-5 flex flex-wrap items-center gap-2">
           <span class="text-sm font-medium text-white/70">Popular destinations:</span>
-          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html">Punta Cana</a>
-          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html">Las Terrenas</a>
-          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html">Santo Domingo</a>
-          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html">Tamarindo (CR)</a>
-          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html">Papagayo (CR)</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html?q=Punta%20Cana">Punta Cana</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html?q=Las%20Terrenas">Las Terrenas</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html?q=Santo%20Domingo">Santo Domingo</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html?q=Tamarindo">Tamarindo (CR)</a>
+          <a class="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-white/25 transition-colors" href="map.html?q=Papagayo">Papagayo (CR)</a>
         </nav>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 sm:px-6 py-12">
+    <section id="properties" class="mx-auto max-w-7xl px-4 sm:px-6 py-12">
       <div class="flex items-end justify-between gap-4 mb-6">
         <div>
           <h2 class="text-2xl font-bold text-harbor-900">Featured Reserve Properties</h2>
           <p class="mt-1 text-sm text-harbor-500">Handpicked luxury residences in Dominican Republic & Costa Rica</p>
         </div>
-        <a class="text-sm font-semibold text-tide-700 hover:text-tide-800 shrink-0" href="map.html">View all properties →</a>
+        <a class="text-sm font-semibold text-tide-700 hover:text-tide-800 shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded" href="map.html">View all properties →</a>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
-          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
-            <img alt="Cocotal Golf Villa" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" />
-            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
-              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Available</span>
-              <span class="bg-harbor-900/90 text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Punta Cana</span>
-            </div>
-          </div>
-          <div class="p-4">
-            <p class="text-lg font-bold text-harbor-900">$2,800 <span class="text-xs text-harbor-500 font-normal">/ month</span></p>
-            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">Cocotal Golf & Country Club Luxury Villa</h3>
-            <p class="mt-0.5 text-sm text-harbor-500">Bávaro, Dominican Republic</p>
-            <a href="property.html?id=dr-cocotal-villa" class="inline-block mt-4 text-sm font-semibold text-tide-700 hover:text-tide-800">View property →</a>
-          </div>
-        </article>
-
-        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
-          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
-            <img alt="Los Corales Condo" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" />
-            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
-              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Available</span>
-            </div>
-          </div>
-          <div class="p-4">
-            <p class="text-lg font-bold text-harbor-900">$1,600 <span class="text-xs text-harbor-500 font-normal">/ month</span></p>
-            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">Beachside Condo 5-Mins from Ocean</h3>
-            <p class="mt-0.5 text-sm text-harbor-500">Los Corales, Dominican Republic</p>
-            <a href="property.html?id=dr-los-corales-condo" class="inline-block mt-4 text-sm font-semibold text-tide-700 hover:text-tide-800">View property →</a>
-          </div>
-        </article>
-
-        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
-          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
-            <img alt="Costa Rica Ocean View Villa" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" />
-            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
-              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Featured</span>
-              <span class="bg-harbor-900/90 text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Costa Rica</span>
-            </div>
-          </div>
-          <div class="p-4">
-            <p class="text-lg font-bold text-harbor-900">$4,500 <span class="text-xs text-harbor-500 font-normal">/ month</span></p>
-            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">Tamarindo Oceanfront Luxury Reserve Villa</h3>
-            <p class="mt-0.5 text-sm text-harbor-500">Guanacaste, Costa Rica</p>
-            <a href="property.html?id=cr-tamarindo-villa" class="inline-block mt-4 text-sm font-semibold text-tide-700 hover:text-tide-800">View property →</a>
-          </div>
-        </article>
-
+      <div id="featured-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <p class="col-span-full text-sm text-harbor-500">Loading featured properties…</p>
       </div>
     </section>
   </main>
+
+  <a href="https://wa.me/16478485997?text=Hi%20Reserve.RealEstate%2C%20I%27d%20like%20more%20information" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 flex items-center gap-2 bg-tide-700 hover:bg-tide-800 text-white pl-4 pr-5 py-3 rounded-full shadow-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-900">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.18-3.01.79.8-2.94-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8Z"></path></svg>
+    <span class="font-semibold text-sm">WhatsApp</span>
+  </a>
 
   <footer class="bg-harbor-950 text-white py-8 border-t border-harbor-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-harbor-400">
       <p>© 2026 RESERVE.REAL ESTATE — Dominican Republic & Costa Rica Luxury Real Estate.</p>
       <div class="flex gap-4">
-        <a class="hover:text-white" href="index.html">Home</a>
-        <a class="hover:text-white" href="map.html">Map</a>
-        <a class="hover:text-white" href="agents.html">Agents</a>
-        <a class="hover:text-white" href="post-property.html">List Property</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="index.html">Home</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="map.html">Map</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="agents.html">Agents</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="post-property.html">List Property</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', function () {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          menu.classList.toggle('hidden');
+        });
+      }
+    })();
+
+    function formatPrice(property) {
+      var amount = '$' + Number(property.price).toLocaleString();
+      return property.saleOrRent === 'rent' ? amount + ' <span class="text-xs text-harbor-500 font-normal">/ month</span>' : amount;
+    }
+
+    async function loadFeaturedProperties() {
+      const grid = document.getElementById('featured-grid');
+      try {
+        const res = await fetch('data/properties.json');
+        const data = await res.json();
+        const listings = (data.listings || []).filter(p => p.featured).slice(0, 3);
+        const items = listings.length ? listings : (data.listings || []).slice(0, 3);
+
+        if (!items.length) {
+          grid.innerHTML = '<p class="col-span-full text-sm text-harbor-500">No featured properties available right now. <a class="text-tide-700 font-semibold" href="map.html">Browse the map</a>.</p>';
+          return;
+        }
+
+        grid.innerHTML = items.map(p => `
+          <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
+            <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
+              <img alt="${p.title}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="${(p.images && p.images[0]) || ''}" />
+              <div class="absolute top-2.5 left-2.5 flex gap-1.5">
+                <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">${p.tag || 'Available'}</span>
+                <span class="bg-harbor-900/90 text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">${p.region || ''}</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-lg font-bold text-harbor-900">${formatPrice(p)}</p>
+              <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">${p.title}</h3>
+              <p class="mt-0.5 text-sm text-harbor-500">${p.location}</p>
+              <a href="property.html?id=${encodeURIComponent(p.id)}" class="inline-block mt-4 text-sm font-semibold text-tide-700 hover:text-tide-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded">View property →</a>
+            </div>
+          </article>
+        `).join('');
+      } catch (err) {
+        console.error('Error loading featured properties:', err);
+        grid.innerHTML = '<p class="col-span-full text-sm text-harbor-500">Featured properties are temporarily unavailable. <a class="text-tide-700 font-semibold" href="map.html">Browse the map</a> instead.</p>';
+      }
+    }
+
+    loadFeaturedProperties();
+  </script>
 
 </body>
 </html>

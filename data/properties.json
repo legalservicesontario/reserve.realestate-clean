@@ -1,0 +1,194 @@
+{
+  "listings": [
+    {
+      "id": "dr-cocotal-villa",
+      "title": "Cocotal Golf & Country Club Luxury Villa",
+      "location": "Bávaro, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "villa",
+      "saleOrRent": "rent",
+      "duration": "LONG_TERM",
+      "price": 2800,
+      "beds": 4,
+      "baths": 4.5,
+      "area_m2": 380,
+      "lat": 18.6892,
+      "lng": -68.4318,
+      "featured": true,
+      "tag": "Available",
+      "description": "A gated golf-course estate minutes from Bávaro's beaches, with a private pool, mature landscaping and full-time staff quarters. Ideal for long-term residents seeking resort-style living.",
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "dr-los-corales-condo",
+      "title": "Beachside Condo 5-Mins from Ocean",
+      "location": "Los Corales, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "condo",
+      "saleOrRent": "rent",
+      "duration": "VACATION",
+      "price": 1600,
+      "beds": 2,
+      "baths": 2,
+      "area_m2": 110,
+      "lat": 18.5601,
+      "lng": -68.3725,
+      "featured": true,
+      "tag": "Available",
+      "description": "A bright, fully-furnished vacation condo a short walk from Los Corales beach, with resort amenities including pool, gym and 24-hour security.",
+      "images": [
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "cr-tamarindo-villa",
+      "title": "Tamarindo Oceanfront Luxury Reserve Villa",
+      "location": "Guanacaste, Costa Rica",
+      "region": "Costa Rica",
+      "type": "villa",
+      "saleOrRent": "rent",
+      "duration": "VACATION",
+      "price": 4500,
+      "beds": 5,
+      "baths": 5,
+      "area_m2": 420,
+      "lat": 10.2993,
+      "lng": -85.8371,
+      "featured": true,
+      "tag": "Featured",
+      "description": "A dramatic oceanfront reserve villa above Tamarindo with infinity pool, floor-to-ceiling glass and direct beach access. Ideal for extended vacation stays and retreats.",
+      "images": [
+        "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "cr-papagayo-villa",
+      "title": "Papagayo Gulf Private Villa",
+      "location": "Papagayo, Guanacaste, Costa Rica",
+      "region": "Costa Rica",
+      "type": "villa",
+      "saleOrRent": "sale",
+      "price": 1250000,
+      "beds": 6,
+      "baths": 6,
+      "area_m2": 520,
+      "lat": 10.585,
+      "lng": -85.694,
+      "featured": true,
+      "tag": "For Sale",
+      "description": "A private gulf-view estate inside the gated Papagayo peninsula, with deep-water dock access, infinity edge pool and staff quarters.",
+      "images": [
+        "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "dr-las-terrenas-penthouse",
+      "title": "Las Terrenas Beachfront Penthouse",
+      "location": "Las Terrenas, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "penthouse",
+      "saleOrRent": "sale",
+      "price": 650000,
+      "beds": 3,
+      "baths": 3,
+      "area_m2": 240,
+      "lat": 19.2953,
+      "lng": -69.5388,
+      "featured": false,
+      "tag": "For Sale",
+      "description": "A top-floor penthouse with wraparound terraces overlooking Las Terrenas beach, steps from the town's cafés and marina.",
+      "images": [
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "dr-santo-domingo-apartment",
+      "title": "Colonial Zone Modern Apartment",
+      "location": "Santo Domingo, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "apartment",
+      "saleOrRent": "rent",
+      "duration": "LONG_TERM",
+      "price": 1200,
+      "beds": 2,
+      "baths": 2,
+      "area_m2": 95,
+      "lat": 18.4747,
+      "lng": -69.8845,
+      "featured": false,
+      "tag": "Available",
+      "description": "A renovated apartment in the historic Colonial Zone, walking distance to restaurants, museums and the Malecón.",
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "dr-cabarete-surf-condo",
+      "title": "Cabarete Surf-Front Condo",
+      "location": "Cabarete, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "condo",
+      "saleOrRent": "rent",
+      "duration": "VACATION",
+      "price": 1400,
+      "beds": 2,
+      "baths": 1,
+      "area_m2": 85,
+      "lat": 19.7504,
+      "lng": -70.4098,
+      "featured": false,
+      "tag": "Available",
+      "description": "Steps from Cabarete's kite and surf breaks, this vacation condo offers a shared rooftop pool and ocean views.",
+      "images": [
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "dr-sosua-villa",
+      "title": "Sosúa Hillside View Villa",
+      "location": "Sosúa, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "villa",
+      "saleOrRent": "rent",
+      "duration": "LONG_TERM",
+      "price": 2100,
+      "beds": 3,
+      "baths": 3,
+      "area_m2": 210,
+      "lat": 19.7514,
+      "lng": -70.5187,
+      "featured": false,
+      "tag": "Available",
+      "description": "A hillside villa above Sosúa Bay with panoramic ocean views, private pool and a short drive to Puerto Plata's airport.",
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    {
+      "id": "dr-puerto-plata-oceanview",
+      "title": "Puerto Plata Oceanview Apartment",
+      "location": "Puerto Plata, Dominican Republic",
+      "region": "Dominican Republic",
+      "type": "apartment",
+      "saleOrRent": "rent",
+      "duration": "LONG_TERM",
+      "price": 900,
+      "beds": 1,
+      "baths": 1,
+      "area_m2": 60,
+      "lat": 19.7934,
+      "lng": -70.6884,
+      "featured": false,
+      "tag": "Available",
+      "description": "A comfortable one-bedroom apartment overlooking Puerto Plata's coastline, ideal for long-term residents.",
+      "images": [
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      ]
+    }
+  ]
+}

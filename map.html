@@ -1,64 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Property Map — Reserve.RealEstate</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Property Map & Search — Reserve.RealEstate</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            harbor: {
+              50: '#f4f6f8', 100: '#e5e9ee', 200: '#cbd4e0', 300: '#a2b2c8',
+              400: '#738ba9', 500: '#516d8e', 600: '#3e5473', 700: '#33445e',
+              800: '#2d3a4e', 900: '#293243', 950: '#0f141c',
+            },
+            tide: {
+              50: '#f0fdfa', 300: '#5eead4', 400: '#2dd4bf', 700: '#0f766e', 800: '#115e59',
+            },
+            coral: { 300: '#fca5a5', 700: '#b91c1c' },
+            sand: { 50: '#fbfaf8' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    :root{--gold:#c8a96a;--cream:#f8f6f0;}
-    body{margin:0;background:var(--cream);color:#111;font-family:'Inter',sans-serif;}
-    h1,h2{font-family:'Cormorant Garamond',serif;}
-    #map{height:calc(100vh - 240px);}    
-    .gold{color:var(--gold);}  
+    #map { height: 420px; }
+    #map:focus { outline: 2px solid #0f766e; outline-offset: 2px; }
   </style>
 </head>
-<body>
-  <nav class="bg-white border-b sticky top-0 z-40 flex justify-between items-center px-8 py-4 shadow-md">
-    <a href="index.html" class="text-2xl font-bold">RESERVE<span class="gold">REALESTATE</span></a>
-    <div class="hidden md:flex gap-6">
-      <a href="index.html" class="hover:text-[#c8a96a]">Home</a>
-      <a href="map.html" class="gold font-semibold">Map</a>
-      <a href="commercial.html" class="hover:text-[#c8a96a]">Commercial</a>
-      <a href="agents.html" class="hover:text-[#c8a96a]">Agents</a>
-      <a href="post-property.html" class="hover:text-[#c8a96a]">List Property</a>
+<body class="min-h-screen flex flex-col font-sans bg-sand-50 text-harbor-900">
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-harbor-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 gap-4">
+      <a class="flex items-center gap-2 shrink-0 font-extrabold text-xl tracking-wider text-harbor-950 uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded" href="index.html">
+        RESERVE<span class="text-tide-700">.REAL ESTATE</span>
+      </a>
+      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="index.html">Home</a>
+        <a class="px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="map.html" aria-current="page">Map</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="commercial.html">Commercial</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="agents.html">Agents</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="post-property.html">List Your Property</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a class="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-800" href="post-property.html">Contact Agent</a>
+        <button id="mobile-menu-btn" type="button" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-harbor-200 text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"></path></svg>
+        </button>
+      </div>
     </div>
-  </nav>
+    <nav id="mobile-menu" aria-label="Mobile navigation" class="hidden md:hidden border-t border-harbor-100 bg-white px-4 pb-4 pt-2 space-y-1 text-sm font-medium">
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="index.html">Home</a>
+      <a class="block px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50" href="map.html">Map</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="commercial.html">Commercial</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="agents.html">Agents</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="post-property.html">List Your Property</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
 
-  <div class="max-w-7xl mx-auto px-8 py-6">
-    <h1 class="text-4xl mb-2">Interactive Property Map</h1>
-    <p class="text-gray-600 mb-4">Explore listings across our Caribbean destinations. Click markers for details and property links.</p>
-  </div>
+  <main class="flex-1">
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 py-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-harbor-950">Search & Explore Properties</h1>
+      <p class="mt-2 text-harbor-500">Explore listings across our Caribbean destinations. Filter below, click a marker, or browse the list for details.</p>
 
-  <div id="map" class="rounded-lg overflow-hidden mx-8"></div>
+      <form id="search-form" method="get" action="map.html" class="mt-6 bg-white rounded-2xl shadow-sm border border-harbor-100 p-3 sm:p-4 grid gap-3 sm:grid-cols-[1fr_auto_auto_auto_auto] items-center">
+        <div class="relative">
+          <label for="map-q" class="sr-only">City, region, or neighborhood…</label>
+          <input id="map-q" name="q" placeholder="Punta Cana, Las Terrenas, Tamarindo…" class="w-full border border-harbor-200 rounded-lg pl-3 h-12 text-base text-harbor-900 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" />
+        </div>
+        <label class="sr-only" for="map-max-price">Maximum price</label>
+        <select id="map-max-price" name="maxPrice" class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
+          <option value="">Any price</option>
+          <option value="1000">≤ $1,000 / mo</option>
+          <option value="2500">≤ $2,500 / mo</option>
+          <option value="5000">≤ $5,000 / mo</option>
+          <option value="10000">≤ $10,000 / mo</option>
+        </select>
+        <label class="sr-only" for="map-type">Property type</label>
+        <select id="map-type" name="type" class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
+          <option value="">Any type</option>
+          <option value="villa">Luxury Villa</option>
+          <option value="apartment">Apartment</option>
+          <option value="condo">Beachfront Condo</option>
+          <option value="penthouse">Penthouse</option>
+        </select>
+        <label class="sr-only" for="map-duration">Duration</label>
+        <select id="map-duration" name="duration" class="h-12 border border-harbor-200 rounded-lg px-3 text-sm text-harbor-800 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600">
+          <option value="">Any duration</option>
+          <option value="LONG_TERM">Long term</option>
+          <option value="VACATION">Vacation stay</option>
+        </select>
+        <button type="submit" class="h-12 px-7 bg-tide-700 hover:bg-tide-800 text-white font-semibold rounded-lg shadow transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-900">Search</button>
+      </form>
+    </section>
 
-  <footer class="bg-black text-gray-400 text-center py-8 mt-8">
-    <div class="text-white text-xl tracking-[4px] mb-3">RESERVE.REALESTATE</div>
-    <p>© 2026 Reserve.RealEstate All Rights Reserved.</p>
+    <section aria-label="Map view" class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div id="map" class="rounded-xl overflow-hidden border border-harbor-100" tabindex="0" aria-label="Interactive property map"></div>
+    </section>
+
+    <section aria-label="Matching properties" class="mx-auto max-w-7xl px-4 sm:px-6 py-10">
+      <div class="flex items-end justify-between gap-4 mb-6">
+        <h2 class="text-2xl font-bold text-harbor-900">Properties</h2>
+        <p id="results-count" class="text-sm text-harbor-500"></p>
+      </div>
+      <div id="listing-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <p class="col-span-full text-sm text-harbor-500">Loading properties…</p>
+      </div>
+    </section>
+  </main>
+
+  <a href="https://wa.me/16478485997?text=Hi%20Reserve.RealEstate%2C%20I%27d%20like%20more%20information" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 flex items-center gap-2 bg-tide-700 hover:bg-tide-800 text-white pl-4 pr-5 py-3 rounded-full shadow-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-900">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.18-3.01.79.8-2.94-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8Z"></path></svg>
+    <span class="font-semibold text-sm">WhatsApp</span>
+  </a>
+
+  <footer class="bg-harbor-950 text-white py-8 border-t border-harbor-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-harbor-400">
+      <p>© 2026 RESERVE.REAL ESTATE — Dominican Republic & Costa Rica Luxury Real Estate.</p>
+      <div class="flex gap-4">
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="index.html">Home</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="map.html">Map</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="agents.html">Agents</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="post-property.html">List Property</a>
+      </div>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    async function loadMap(){
-      try{
+    (function () {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', function () {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          menu.classList.toggle('hidden');
+        });
+      }
+    })();
+
+    function getParams() {
+      const url = new URL(window.location.href);
+      return {
+        q: (url.searchParams.get('q') || '').trim().toLowerCase(),
+        maxPrice: url.searchParams.get('maxPrice') || '',
+        type: url.searchParams.get('type') || '',
+        duration: url.searchParams.get('duration') || ''
+      };
+    }
+
+    function populateFormFromParams(params) {
+      document.getElementById('map-q').value = new URL(window.location.href).searchParams.get('q') || '';
+      document.getElementById('map-max-price').value = params.maxPrice;
+      document.getElementById('map-type').value = params.type;
+      document.getElementById('map-duration').value = params.duration;
+    }
+
+    function matchesFilters(p, params) {
+      if (params.q) {
+        const haystack = `${p.title} ${p.location}`.toLowerCase();
+        if (!haystack.includes(params.q)) return false;
+      }
+      if (params.maxPrice && Number(p.price) > Number(params.maxPrice)) return false;
+      if (params.type && p.type !== params.type) return false;
+      if (params.duration && p.duration !== params.duration) return false;
+      return true;
+    }
+
+    function formatPrice(p) {
+      var amount = '$' + Number(p.price).toLocaleString();
+      return p.saleOrRent === 'rent' ? amount + ' <span class="text-xs text-harbor-500 font-normal">/ month</span>' : amount;
+    }
+
+    function renderListingGrid(listings) {
+      const grid = document.getElementById('listing-grid');
+      const count = document.getElementById('results-count');
+      count.textContent = listings.length + (listings.length === 1 ? ' property found' : ' properties found');
+
+      if (!listings.length) {
+        grid.innerHTML = '<p class="col-span-full text-sm text-harbor-500">No properties match your search. Try clearing a filter.</p>';
+        return;
+      }
+
+      grid.innerHTML = listings.map(p => `
+        <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
+          <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
+            <img alt="${p.title}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="${(p.images && p.images[0]) || ''}" />
+            <div class="absolute top-2.5 left-2.5 flex gap-1.5">
+              <span class="bg-white/95 text-tide-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">${p.tag || 'Available'}</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-lg font-bold text-harbor-900">${formatPrice(p)}</p>
+            <h3 class="mt-1 text-sm font-semibold text-harbor-800 truncate">${p.title}</h3>
+            <p class="mt-0.5 text-sm text-harbor-500">${p.location}</p>
+            <a href="property.html?id=${encodeURIComponent(p.id)}" class="inline-block mt-4 text-sm font-semibold text-tide-700 hover:text-tide-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded">View property →</a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    async function init() {
+      const grid = document.getElementById('listing-grid');
+      const params = getParams();
+      populateFormFromParams(params);
+
+      const map = L.map('map').setView([16.5, -76.5], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      try {
         const res = await fetch('data/properties.json');
         const data = await res.json();
-        const map = L.map('map').setView([18.6, -69.9], 8);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+        const listings = (data.listings || []).filter(p => matchesFilters(p, params));
 
-        data.listings.forEach(p => {
-          if(p.lat && p.lng){
-            const marker = L.circleMarker([p.lat,p.lng],{radius:8,fillColor:'#c8a96a',color:'#fff',weight:2,opacity:1,fillOpacity:0.8}).addTo(map);
-            marker.bindPopup(`<div class="p-3"><strong>${p.title}</strong><br>${p.location}<br>$${p.price.toLocaleString()} ${p.saleOrRent=='rent'?'/mo':''}<br><a href="property.html?id=${p.id}" class="text-blue-600 underline">View details</a></div>`);
+        renderListingGrid(listings);
+
+        const markers = [];
+        listings.forEach(p => {
+          if (p.lat && p.lng) {
+            const marker = L.circleMarker([p.lat, p.lng], {
+              radius: 8, fillColor: '#0f766e', color: '#fff', weight: 2, opacity: 1, fillOpacity: 0.85
+            }).addTo(map);
+            marker.bindPopup(`<strong>${p.title}</strong><br>${p.location}<br>$${Number(p.price).toLocaleString()}${p.saleOrRent === 'rent' ? '/mo' : ''}<br><a href="property.html?id=${encodeURIComponent(p.id)}" class="text-teal-700 underline">View details</a>`);
+            markers.push(marker);
           }
         });
-      }catch(err){
+
+        if (markers.length) {
+          const group = L.featureGroup(markers);
+          map.fitBounds(group.getBounds().pad(0.3));
+        }
+      } catch (err) {
         console.error('Map error:', err);
+        grid.innerHTML = '<p class="col-span-full text-sm text-coral-700">Unable to load properties right now. Please try again later.</p>';
       }
     }
-    loadMap();
+
+    init();
   </script>
 </body>
 </html>

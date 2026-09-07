@@ -1,48 +1,118 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Agents — Reserve Real Estate</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agents — Reserve.RealEstate</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            harbor: {
+              50: '#f4f6f8', 100: '#e5e9ee', 200: '#cbd4e0', 300: '#a2b2c8',
+              400: '#738ba9', 500: '#516d8e', 600: '#3e5473', 700: '#33445e',
+              800: '#2d3a4e', 900: '#293243', 950: '#0f141c',
+            },
+            tide: {
+              50: '#f0fdfa', 300: '#5eead4', 400: '#2dd4bf', 700: '#0f766e', 800: '#115e59',
+            },
+            coral: { 300: '#fca5a5', 700: '#b91c1c' },
+            sand: { 50: '#fbfaf8' }
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen">
-  <header class="bg-white border-b sticky top-0 z-40">
-    <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-xl font-bold">RESERVE.REALESTATE</a>
-      <nav class="hidden md:flex gap-5 text-sm">
-        <a href="index.html">Home</a>
-        <a href="map.html">Map</a>
-        <a href="commercial.html">Commercial</a>
-        <a href="agents.html" class="font-semibold">Agents</a>
-        <a href="post-property.html">List Property</a>
+<body class="min-h-screen flex flex-col font-sans bg-sand-50 text-harbor-900">
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-harbor-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 gap-4">
+      <a class="flex items-center gap-2 shrink-0 font-extrabold text-xl tracking-wider text-harbor-950 uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600 rounded" href="index.html">
+        RESERVE<span class="text-tide-700">.REAL ESTATE</span>
+      </a>
+      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="index.html">Home</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="map.html">Map</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="commercial.html">Commercial</a>
+        <a class="px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="agents.html" aria-current="page">Agents</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="post-property.html">List Your Property</a>
+        <a class="px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" href="dashboard.html">Dashboard</a>
       </nav>
+      <div class="flex items-center gap-2">
+        <a class="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-800" href="post-property.html">Contact Agent</a>
+        <button id="mobile-menu-btn" type="button" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-harbor-200 text-harbor-800 hover:bg-harbor-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-600" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"></path></svg>
+        </button>
+      </div>
     </div>
+    <nav id="mobile-menu" aria-label="Mobile navigation" class="hidden md:hidden border-t border-harbor-100 bg-white px-4 pb-4 pt-2 space-y-1 text-sm font-medium">
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="index.html">Home</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="map.html">Map</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="commercial.html">Commercial</a>
+      <a class="block px-3 py-2 rounded-lg text-tide-700 font-semibold hover:bg-tide-50" href="agents.html">Agents</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="post-property.html">List Your Property</a>
+      <a class="block px-3 py-2 rounded-lg text-harbor-800 hover:bg-harbor-50" href="dashboard.html">Dashboard</a>
+    </nav>
   </header>
 
-  <main class="mx-auto max-w-5xl px-4 py-8">
-    <h1 class="text-2xl font-bold">Our Agents</h1>
-    <p class="text-sm text-gray-600 mt-1">Experienced local brokers focused on Tamarindo (CR) and Cabarete / Sosúa / Puerto Plata (DR).</p>
+  <main class="flex-1 mx-auto max-w-7xl w-full px-4 sm:px-6 py-10">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-harbor-950">Our Agents</h1>
+    <p class="mt-3 text-harbor-600 max-w-2xl">Experienced local brokers focused on Tamarindo (CR) and Cabarete / Sosúa / Puerto Plata (DR).</p>
 
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <article class="bg-white p-4 rounded shadow">
-        <img src="assets/images/agent-livie.jpg" alt="Livie Grimaldi" class="w-full h-48 object-cover rounded" />
-        <h3 class="mt-3 font-semibold">Livie Grimaldi</h3>
-        <p class="text-sm text-gray-700">Local expert in Dominican Republic beachfront properties, short-term rental optimisation and investor relations.</p>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <article class="bg-white rounded-xl shadow-sm border border-harbor-100 p-6">
+        <div class="w-full h-40 rounded-lg bg-harbor-900 flex items-center justify-center text-white text-3xl font-bold tracking-wide" aria-hidden="true">LG</div>
+        <h3 class="mt-4 font-semibold text-harbor-900">Livie Grimaldi</h3>
+        <p class="text-sm text-harbor-600 mt-1">Local expert in Dominican Republic beachfront properties, short-term rental optimisation and investor relations.</p>
       </article>
 
-      <article class="bg-white p-4 rounded shadow">
-        <img src="assets/images/agent-joanna.jpg" alt="Joanna Kakkava" class="w-full h-48 object-cover rounded" />
-        <h3 class="mt-3 font-semibold">Joanna Kakkava</h3>
-        <p class="text-sm text-gray-700">Costa Rica specialist with deep network in Tamarindo and Guanacaste; focuses on wellness & surf retreat properties.</p>
+      <article class="bg-white rounded-xl shadow-sm border border-harbor-100 p-6">
+        <div class="w-full h-40 rounded-lg bg-tide-700 flex items-center justify-center text-white text-3xl font-bold tracking-wide" aria-hidden="true">JK</div>
+        <h3 class="mt-4 font-semibold text-harbor-900">Joanna Kakkava</h3>
+        <p class="text-sm text-harbor-600 mt-1">Costa Rica specialist with deep network in Tamarindo and Guanacaste; focuses on wellness & surf retreat properties.</p>
       </article>
 
-      <article class="bg-white p-4 rounded shadow">
-        <img src="assets/images/agent-jason.jpg" alt="Jason Evdoxiadis" class="w-full h-48 object-cover rounded" />
-        <h3 class="mt-3 font-semibold">Jason Evdoxiadis</h3>
-        <p class="text-sm text-gray-700">Commercial real estate and fractional ownership advisor; experience arranging VTB/financing structures.</p>
+      <article class="bg-white rounded-xl shadow-sm border border-harbor-100 p-6">
+        <div class="w-full h-40 rounded-lg bg-harbor-700 flex items-center justify-center text-white text-3xl font-bold tracking-wide" aria-hidden="true">JE</div>
+        <h3 class="mt-4 font-semibold text-harbor-900">Jason Evdoxiadis</h3>
+        <p class="text-sm text-harbor-600 mt-1">Commercial real estate and fractional ownership advisor; experience arranging VTB/financing structures.</p>
       </article>
     </div>
   </main>
+
+  <a href="https://wa.me/16478485997?text=Hi%20Reserve.RealEstate%2C%20I%27d%20like%20to%20speak%20with%20an%20agent" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 flex items-center gap-2 bg-tide-700 hover:bg-tide-800 text-white pl-4 pr-5 py-3 rounded-full shadow-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tide-900">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.18-3.01.79.8-2.94-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8Z"></path></svg>
+    <span class="font-semibold text-sm">WhatsApp</span>
+  </a>
+
+  <footer class="bg-harbor-950 text-white py-8 border-t border-harbor-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-harbor-400">
+      <p>© 2026 RESERVE.REAL ESTATE — Dominican Republic & Costa Rica Luxury Real Estate.</p>
+      <div class="flex gap-4">
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="index.html">Home</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="map.html">Map</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="agents.html">Agents</a>
+        <a class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-tide-400 rounded" href="post-property.html">List Property</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', function () {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          menu.classList.toggle('hidden');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
