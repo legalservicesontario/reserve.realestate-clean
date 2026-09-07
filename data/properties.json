@@ -1,0 +1,100 @@
+{
+  "listings": [
+    {
+      "id": "villa-tamarindo-01",
+      "title": "Oceanfront Villa Serenity",
+      "location": "Tamarindo, Costa Rica",
+      "type": "Villa",
+      "saleOrRent": "sale",
+      "badge": "For Sale",
+      "price": 1850000,
+      "beds": 5,
+      "baths": 6,
+      "area_m2": 480,
+      "lat": 10.2993,
+      "lng": -85.8371,
+      "images": [
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Villa+Serenity",
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Ocean+View",
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Interior"
+      ],
+      "description": "A breathtaking five-bedroom oceanfront villa with infinity pool, private beach access, and panoramic sunset views over the Pacific."
+    },
+    {
+      "id": "penthouse-cabarete-02",
+      "title": "Cabarete Sky Penthouse",
+      "location": "Cabarete, Dominican Republic",
+      "type": "Penthouse",
+      "saleOrRent": "sale",
+      "badge": "Exclusive",
+      "price": 2450000,
+      "beds": 4,
+      "baths": 5,
+      "area_m2": 390,
+      "lat": 19.7500,
+      "lng": -70.4167,
+      "images": [
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Sky+Penthouse",
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Rooftop+Terrace"
+      ],
+      "description": "An exclusive top-floor penthouse with wraparound terraces, private rooftop pool, and unobstructed views of the Cabarete coastline."
+    },
+    {
+      "id": "condo-sosua-03",
+      "title": "Sosúa Bay Residence",
+      "location": "Sosúa, Dominican Republic",
+      "type": "Condo",
+      "saleOrRent": "rent",
+      "badge": "New",
+      "price": 6500,
+      "beds": 3,
+      "baths": 3,
+      "area_m2": 210,
+      "lat": 19.7515,
+      "lng": -70.5165,
+      "images": [
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Bay+Residence",
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Master+Suite"
+      ],
+      "description": "Brand-new beachfront condo residence steps from Sosúa Bay, featuring modern finishes, resort-style amenities, and a private balcony."
+    },
+    {
+      "id": "villa-puertoplata-04",
+      "title": "Puerto Plata Hillside Estate",
+      "location": "Puerto Plata, Dominican Republic",
+      "type": "Villa",
+      "saleOrRent": "sale",
+      "badge": "For Sale",
+      "price": 3200000,
+      "beds": 6,
+      "baths": 7,
+      "area_m2": 620,
+      "lat": 19.7934,
+      "lng": -70.6884,
+      "images": [
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Hillside+Estate",
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Infinity+Pool"
+      ],
+      "description": "A grand hillside estate overlooking Puerto Plata's coastline, offering expansive living spaces, a private cinema, and staff quarters."
+    },
+    {
+      "id": "condo-tamarindo-05",
+      "title": "Tamarindo Beachfront Suites",
+      "location": "Tamarindo, Costa Rica",
+      "type": "Condo",
+      "saleOrRent": "sale",
+      "badge": "Exclusive",
+      "price": 975000,
+      "beds": 2,
+      "baths": 2,
+      "area_m2": 145,
+      "lat": 10.2985,
+      "lng": -85.8402,
+      "images": [
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Beachfront+Suites",
+        "https://placehold.co/800x600/0b1f3a/c8a96a?text=Living+Room"
+      ],
+      "description": "A boutique beachfront residence with direct sand access, rooftop lounge, and concierge services in the heart of Tamarindo."
+    }
+  ]
+}
