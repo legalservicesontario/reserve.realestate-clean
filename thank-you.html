@@ -5,15 +5,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Thank you — Reserve Real Estate</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: { colors: { reserve: { 950:'#0B131F',900:'#142132',800:'#1E324A',100:'#F0F4F8',50:'#F8FAFC', gold:'#C5A059' } } } } }
-  </script>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-reserve-50 text-reserve-950">
-  <main class="max-w-2xl mx-auto text-center p-8">
-    <h1 class="text-3xl font-bold mb-4">Thank you</h1>
-    <p class="text-lg mb-6">Thank you, we received your message. Get in touch on WhatsApp here <a href="https://wa.me/16478485997" class="text-green-600 font-semibold">@reserve.realestate</a>.</p>
-    <a href="index.html" class="px-5 py-3 bg-reserve-950 text-white rounded">Return to home</a>
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+  <header class="bg-white border-b sticky top-0 z-40">
+    <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-xl font-bold">RESERVE.REALESTATE</a>
+      <nav class="hidden md:flex gap-5 text-sm">
+        <a href="index.html">Home</a>
+        <a href="map.html">Map</a>
+        <a href="commercial.html">Commercial</a>
+        <a href="agents.html">Agents</a>
+        <a href="post-property.html">List Property</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center">
+    <section class="max-w-2xl mx-auto text-center p-8 bg-white rounded shadow">
+      <h1 class="text-3xl font-bold mb-4">Thank you</h1>
+      <p class="text-lg mb-6">Thank you, we received your message. Get in touch on WhatsApp here <a href="https://wa.me/16478485997" class="text-green-600 font-semibold">@reserve.realestate</a>.</p>
+      <a href="index.html" class="px-5 py-3 bg-black text-white rounded">Return to home</a>
+    </section>
   </main>
 </body>
 </html>
