@@ -6,12 +6,11 @@
   <title>Property Map — Reserve.RealEstate</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
     :root{--gold:#c8a96a;--cream:#f8f6f0;}
     body{margin:0;background:var(--cream);color:#111;font-family:'Inter',sans-serif;}
     h1,h2{font-family:'Cormorant Garamond',serif;}
-    #map{height:calc(100vh - 240px);}    
+    #map{height:calc(100vh - 240px);min-height:420px;}
     .gold{color:var(--gold);}  
   </style>
 </head>
@@ -32,33 +31,81 @@
     <p class="text-gray-600 mb-4">Explore listings across our Caribbean destinations. Click markers for details and property links.</p>
   </div>
 
-  <div id="map" class="rounded-lg overflow-hidden mx-8"></div>
+  <div id="map" class="rounded-lg overflow-hidden mx-8" role="application" aria-label="Property locations map"></div>
 
   <footer class="bg-black text-gray-400 text-center py-8 mt-8">
     <div class="text-white text-xl tracking-[4px] mb-3">RESERVE.REALESTATE</div>
     <p>© 2026 Reserve.RealEstate All Rights Reserved.</p>
   </footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    async function loadMap(){
-      try{
-        const res = await fetch('data/properties.json');
-        const data = await res.json();
-        const map = L.map('map').setView([18.6, -69.9], 8);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+    function showMapMessage(message) {
+      document.getElementById('map').innerHTML =
+        `<div class="h-full min-h-[420px] flex items-center justify-center bg-gray-100 px-6 text-center text-gray-600">${message}</div>`;
+    }
 
-        data.listings.forEach(p => {
-          if(p.lat && p.lng){
-            const marker = L.circleMarker([p.lat,p.lng],{radius:8,fillColor:'#c8a96a',color:'#fff',weight:2,opacity:1,fillOpacity:0.8}).addTo(map);
-            marker.bindPopup(`<div class="p-3"><strong>${p.title}</strong><br>${p.location}<br>$${p.price.toLocaleString()} ${p.saleOrRent=='rent'?'/mo':''}<br><a href="property.html?id=${p.id}" class="text-blue-600 underline">View details</a></div>`);
-          }
+    async function initMap() {
+      try {
+        const response = await fetch('data/properties.json');
+        if (!response.ok) throw new Error(`Property data request failed: ${response.status}`);
+        const data = await response.json();
+        const listings = (data.listings || []).filter(property => Number.isFinite(Number(property.lat)) && Number.isFinite(Number(property.lng)));
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: 18.6, lng: -69.9 },
+          zoom: 8,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true
         });
-      }catch(err){
-        console.error('Map error:', err);
+        const bounds = new google.maps.LatLngBounds();
+        const infoWindow = new google.maps.InfoWindow();
+
+        listings.forEach(property => {
+          const position = { lat: Number(property.lat), lng: Number(property.lng) };
+          const marker = new google.maps.Marker({
+            map,
+            position,
+            title: property.title,
+            label: { text: '◆', color: '#c8a96a', fontSize: '24px' }
+          });
+          bounds.extend(position);
+          marker.addListener('click', () => {
+            const price = Number(property.price).toLocaleString();
+            const suffix = property.saleOrRent === 'rent' ? ' / month' : '';
+            infoWindow.setContent(`
+              <div style="padding:8px;max-width:240px">
+                <strong>${property.title}</strong><br>
+                ${property.location}<br>
+                $${price}${suffix}<br>
+                <a href="property.html?id=${encodeURIComponent(property.id)}">View details</a>
+              </div>
+            `);
+            infoWindow.open({ map, anchor: marker });
+          });
+        });
+        if (listings.length) map.fitBounds(bounds);
+      } catch (error) {
+        console.error('Map error:', error);
+        showMapMessage('Property locations are temporarily unavailable. Please try again later.');
       }
     }
-    loadMap();
+
+    function loadGoogleMaps() {
+      const apiKey = window.GOOGLE_MAPS_API_KEY;
+      if (!apiKey) {
+        showMapMessage('Google Maps is not configured. Set <code>window.GOOGLE_MAPS_API_KEY</code> before loading this page.');
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&callback=initMap`;
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => showMapMessage('Google Maps could not be loaded. Check the API key and allowed domains.');
+      document.head.appendChild(script);
+    }
+
+    window.initMap = initMap;
+    loadGoogleMaps();
   </script>
 </body>
 </html>
