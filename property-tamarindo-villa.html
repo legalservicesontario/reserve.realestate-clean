@@ -5,11 +5,24 @@
 <title>Tamarindo Oceanfront Luxury Reserve Villa | Reserve.RealEstate</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>:root{--gold:#c8a96a;--cream:#f8f6f0}body{margin:0;background:var(--cream);font-family:'Inter',sans-serif}h1,h2,h3{font-family:'Cormorant Garamond',serif}.hero{height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.25)),url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center;display:flex;align-items:center}.gold{color:var(--gold)}.glass{background:rgba(255,255,255,.12);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.25)}.card{background:#fff;border-radius:30px;box-shadow:0 20px 60px rgba(0,0,0,.08)}.gold-line{width:80px;height:3px;background:var(--gold);margin:auto}</style>
+<style>:root{--gold:#c8a96a;--cream:#f8f6f0}body{margin:0;background:var(--cream);font-family:'Inter',sans-serif}h1,h2,h3{font-family:'Cormorant Garamond',serif}.hero{height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.25)),url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center;display:flex;align-items:center}.gold{color:var(--gold)}.glass{background:rgba(255,255,255,.12);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.25)}.card{background:#fff;border-radius:30px;box-shadow:0 20px 60px rgba(0,0,0,.08)}.gold-line{width:80px;height:3px;background:var(--gold);margin:auto}.like-btn{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);padding:.7rem 1rem;border-radius:9999px;font-weight:600;backdrop-filter:blur(8px)}.like-btn.saved{background:#fff;color:#111;border-color:#fff}</style>
 </head>
 <body>
 <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-8 text-white"><div class="text-2xl tracking-[8px]">RESERVE.REALESTATE</div></nav>
-<section class="hero text-white"><div class="max-w-7xl mx-auto px-8 w-full"><div class="glass rounded-3xl p-10 max-w-3xl"><p class="uppercase tracking-[8px] mb-6 text-sm">Costa Rica Luxury Collection</p><h1 class="text-5xl leading-tight mb-8">Tamarindo Oceanfront<br>Luxury Reserve Villa</h1><h2 class="text-2xl mb-10">Guanacaste, Costa Rica</h2><p class="gold uppercase text-sm">Price</p><p class="text-5xl mb-10">$4,500 / month</p></div></div></section>
+<section class="hero text-white"><div class="max-w-7xl mx-auto px-8 w-full"><div class="glass rounded-3xl p-10 max-w-3xl"><p class="uppercase tracking-[8px] mb-6 text-sm">Costa Rica Luxury Collection</p><h1 class="text-5xl leading-tight mb-8">Tamarindo Oceanfront<br>Luxury Reserve Villa</h1><h2 class="text-2xl mb-10">Guanacaste, Costa Rica</h2><p class="gold uppercase text-sm">Price</p><p class="text-5xl mb-6">$4,500 / month</p><div class="flex gap-3 mb-10"><button id="likeButton" class="like-btn" type="button" aria-pressed="false"><span id="likeHeart">♡</span><span id="likeText">Like</span></button></div></div></div></section>
 <section class="max-w-7xl mx-auto px-8 py-24"><h2 class="text-5xl text-center">Property Details</h2><div class="gold-line mt-6 mb-14"></div><div class="grid lg:grid-cols-2 gap-12"><p class="text-lg leading-9 text-gray-700">An oceanfront retreat with elevated finishes, panoramic views, and immediate access to Tamarindo lifestyle amenities.</p><div class="grid grid-cols-2 gap-6"><div class="card p-6"><h3 class="gold text-xl">Type</h3><p class="text-2xl mt-2">Luxury Villa</p></div><div class="card p-6"><h3 class="gold text-xl">Bedrooms</h3><p class="text-2xl mt-2">4</p></div><div class="card p-6"><h3 class="gold text-xl">Bathrooms</h3><p class="text-2xl mt-2">4</p></div><div class="card p-6"><h3 class="gold text-xl">Parking</h3><p class="text-2xl mt-2">Included</p></div></div></div></section>
 <footer class="bg-black text-gray-400 text-center py-12"><div class="text-white text-2xl tracking-[8px] mb-5">RESERVE.REALESTATE</div><p>© 2026 Reserve.RealEstate All Rights Reserved.</p></footer>
+<script>
+(function(){
+  const PROPERTY_ID='cr-tamarindo-villa';
+  const btn=document.getElementById('likeButton');
+  const heart=document.getElementById('likeHeart');
+  const text=document.getElementById('likeText');
+  function getSaved(){try{return JSON.parse(localStorage.getItem('savedListings')||'[]')}catch{return []}}
+  function setSaved(v){localStorage.setItem('savedListings',JSON.stringify(v));}
+  function paint(){const s=getSaved().includes(PROPERTY_ID);heart.textContent=s?'♥':'♡';text.textContent=s?'Liked':'Like';btn.classList.toggle('saved',s);btn.setAttribute('aria-pressed',String(s));}
+  btn.addEventListener('click',()=>{const u=localStorage.getItem('userEmail');if(!u){window.location.href='index.html';return;}const a=getSaved();const i=a.indexOf(PROPERTY_ID);if(i===-1)a.push(PROPERTY_ID);else a.splice(i,1);setSaved(a);paint();});
+  paint();
+})();
+</script>
 </body></html>

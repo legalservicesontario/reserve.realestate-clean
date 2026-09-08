@@ -17,6 +17,9 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif}
 .gallery img{height:320px;width:100%;object-fit:cover;border-radius:20px;transition:.4s}
 .gallery img:hover{transform:scale(1.03)}
 .gold-line{width:80px;height:3px;background:var(--gold);margin:auto}
+.like-btn{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);padding:.7rem 1rem;border-radius:9999px;font-weight:600;backdrop-filter:blur(8px)}
+.like-btn .heart{font-size:1rem;line-height:1}
+.like-btn.saved{background:#fff;color:#111;border-color:#fff}
 </style>
 </head>
 <body>
@@ -26,11 +29,42 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif}
     <a href="#details">Details</a><a href="#gallery">Gallery</a><a href="#tour">Tour</a><a href="#contact">Contact</a>
   </div>
 </nav>
-<section class="hero text-white"><div class="max-w-7xl mx-auto px-8 w-full"><div class="glass rounded-3xl p-10 max-w-3xl"><p class="uppercase tracking-[8px] mb-6 text-sm">Exclusive Caribbean Collection</p><h1 class="text-5xl leading-tight mb-8">Cocotal Golf & Country Club<br>Luxury Villa</h1><h2 class="text-2xl mb-10">Bávaro, Punta Cana, Dominican Republic</h2><p class="gold uppercase text-sm">Price</p><p class="text-5xl mb-10">$2,800 / month</p><a href="#contact" class="inline-block bg-white text-black px-10 py-5 rounded-full uppercase tracking-widest">Schedule Private Viewing</a></div></div></section>
+<section class="hero text-white"><div class="max-w-7xl mx-auto px-8 w-full"><div class="glass rounded-3xl p-10 max-w-3xl"><p class="uppercase tracking-[8px] mb-6 text-sm">Exclusive Caribbean Collection</p><h1 class="text-5xl leading-tight mb-8">Cocotal Golf & Country Club<br>Luxury Villa</h1><h2 class="text-2xl mb-10">Bávaro, Punta Cana, Dominican Republic</h2><p class="gold uppercase text-sm">Price</p><p class="text-5xl mb-6">$2,800 / month</p><div class="flex flex-wrap gap-3 mb-10"><button id="likeButton" class="like-btn" type="button" aria-pressed="false"><span class="heart" id="likeHeart">♡</span><span id="likeText">Like</span></button><a href="#contact" class="inline-block bg-white text-black px-10 py-5 rounded-full uppercase tracking-widest">Schedule Private Viewing</a></div></div></div></section>
 <section id="details" class="max-w-7xl mx-auto px-8 py-24"><h2 class="text-5xl text-center">Property Details</h2><div class="gold-line mt-6 mb-14"></div><div class="grid lg:grid-cols-2 gap-12 items-start"><p class="text-lg leading-9 text-gray-700">A refined villa in one of Punta Cana's most sought-after gated communities, offering golf, tropical landscaping, and easy access to beaches and amenities.</p><div class="grid grid-cols-2 gap-6"><div class="card p-6"><h3 class="gold text-xl">Type</h3><p class="text-2xl mt-2">Luxury Villa</p></div><div class="card p-6"><h3 class="gold text-xl">Bedrooms</h3><p class="text-2xl mt-2">4</p></div><div class="card p-6"><h3 class="gold text-xl">Bathrooms</h3><p class="text-2xl mt-2">4.5</p></div><div class="card p-6"><h3 class="gold text-xl">Parking</h3><p class="text-2xl mt-2">Included</p></div></div></div></section>
 <section id="gallery" class="bg-white py-24"><div class="max-w-7xl mx-auto px-8"><h2 class="text-5xl text-center mb-6">Property Gallery</h2><div class="gold-line mb-16"></div><div class="gallery grid md:grid-cols-2 lg:grid-cols-3 gap-8"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Villa exterior"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Living room"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80" alt="Bedroom"></div></div></section>
 <section id="tour" class="py-24 px-8"><div class="max-w-6xl mx-auto"><h2 class="text-5xl text-center mb-6">Cinematic Property Tour</h2><div class="gold-line mb-16"></div><div class="card p-8"><video controls class="w-full rounded-3xl" poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"></video><p class="text-center mt-6 text-gray-600">Upload your branded walkthrough video here.</p></div></div></section>
 <section id="contact" class="bg-[#111] text-white py-24 px-8"><div class="max-w-5xl mx-auto"><h2 class="text-5xl text-center mb-6">Reserve Your Private Viewing</h2><div class="gold-line mb-16"></div><form class="grid md:grid-cols-2 gap-6"><input class="p-5 rounded-xl text-black" placeholder="Full Name"><input class="p-5 rounded-xl text-black" placeholder="Email Address"><input class="p-5 rounded-xl text-black" placeholder="Phone Number"><input class="p-5 rounded-xl text-black" placeholder="Preferred Viewing Date"><textarea class="md:col-span-2 p-5 rounded-xl text-black" rows="6" placeholder="Message"></textarea><button type="submit" class="md:col-span-2 bg-[#c8a96a] text-black py-5 rounded-xl uppercase tracking-[5px] font-semibold">Request Information</button></form></div></section>
 <footer class="bg-black text-gray-400 text-center py-12"><div class="text-white text-2xl tracking-[8px] mb-5">RESERVE.REALESTATE</div><p>Luxury Real Estate Collection</p><p class="mt-5">© 2026 Reserve.RealEstate All Rights Reserved.</p></footer>
+<script>
+(function(){
+  const PROPERTY_ID='dr-cocotal-villa';
+  const btn=document.getElementById('likeButton');
+  const heart=document.getElementById('likeHeart');
+  const text=document.getElementById('likeText');
+
+  function getSaved(){
+    try{return JSON.parse(localStorage.getItem('savedListings')||'[]')}catch{return []}
+  }
+  function setSaved(v){localStorage.setItem('savedListings',JSON.stringify(v));}
+  function isSaved(){return getSaved().includes(PROPERTY_ID);}
+  function paint(){
+    const saved=isSaved();
+    heart.textContent=saved?'♥':'♡';
+    text.textContent=saved?'Liked':'Like';
+    btn.classList.toggle('saved',saved);
+    btn.setAttribute('aria-pressed',String(saved));
+  }
+  btn.addEventListener('click',()=>{
+    const userEmail=localStorage.getItem('userEmail');
+    if(!userEmail){window.location.href='index.html';return;}
+    const saved=getSaved();
+    const i=saved.indexOf(PROPERTY_ID);
+    if(i===-1)saved.push(PROPERTY_ID); else saved.splice(i,1);
+    setSaved(saved);
+    paint();
+  });
+  paint();
+})();
+</script>
 </body>
 </html>

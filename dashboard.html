@@ -58,6 +58,12 @@
   </div>
 
   <script>
+    const PROPERTY_PAGE_MAP = {
+      'dr-cocotal-villa': 'property-cocotal-villa.html',
+      'dr-los-corales-condo': 'property-los-corales-condo.html',
+      'cr-tamarindo-villa': 'property-tamarindo-villa.html'
+    };
+
     // Check if user is logged in
     window.addEventListener('DOMContentLoaded', () => {
       const userEmail = localStorage.getItem('userEmail');
@@ -79,6 +85,10 @@
       // Show selected tab
       document.getElementById(tabName + '-tab').style.display = 'block';
       event.currentTarget.classList.add('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]');
+    }
+
+    function getPropertyHref(id){
+      return PROPERTY_PAGE_MAP[id] || `property.html?id=${encodeURIComponent(id)}`;
     }
 
     async function loadSavedListings(){
@@ -106,7 +116,7 @@
             <p class="text-[#c8a96a] uppercase text-sm mb-3">${p.location}</p>
             <p class="text-2xl font-bold mb-4">$${Number(p.price || 0).toLocaleString()}</p>
             <div class="flex gap-4">
-              <a href="property.html?id=${p.id}" class="flex-1 bg-[#c8a96a] text-black text-center py-2 rounded-lg hover:bg-[#b39657] font-semibold">View</a>
+              <a href="${getPropertyHref(p.id)}" class="flex-1 bg-[#c8a96a] text-black text-center py-2 rounded-lg hover:bg-[#b39657] font-semibold">View</a>
               <button onclick="removeSaved('${p.id}')" class="flex-1 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 font-semibold">Remove</button>
             </div>
           </div>
