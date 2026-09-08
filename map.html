@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Property Map — Reserve.RealEstate</title>
-  <meta name="description" content="Interactive property map for Reserve.RealEstate listings in Dominican Republic and Costa Rica." />
+  <meta name="description" content="Interactive property map for Reserve.RealEstate listings." />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
   <nav class="bg-white border-b sticky top-0 z-40 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
       <a href="index.html" class="text-2xl font-bold tracking-wide">
-        RESERVE<span class="gold">REALESTATE</span>
+        RESERVE<span class="gold">.REALESTATE</span>
       </a>
 
       <div class="hidden md:flex gap-6 text-sm items-center">
@@ -43,13 +43,13 @@
   <!-- Title -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
     <h1 class="text-4xl mb-2">Interactive Property Map</h1>
-    <p class="text-gray-600">Explore listings across our Caribbean destinations. Use search and filters, then click markers for details.</p>
+    <p class="text-gray-600">Search and filter listings, then click markers to open details in <code>property.html?id=...</code>.</p>
   </section>
 
   <!-- Filters -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-4">
     <form id="filterForm" class="bg-white border border-gray-200 rounded-2xl p-3 sm:p-4 shadow-sm grid gap-3 sm:grid-cols-[1fr_auto_auto_auto] items-center">
-      <input id="q" type="text" placeholder="Search city, location, title, or listing id..." class="w-full h-11 border border-gray-200 rounded-lg px-3 outline-none focus:border-black" />
+      <input id="q" type="text" placeholder="Search title, location, city, country, or id..." class="w-full h-11 border border-gray-200 rounded-lg px-3 outline-none focus:border-black" />
 
       <select id="purpose" class="h-11 border border-gray-200 rounded-lg px-3 outline-none focus:border-black">
         <option value="">Any purpose</option>
@@ -87,7 +87,7 @@
     <p>© 2026 Reserve.RealEstate All Rights Reserved.</p>
   </footer>
 
-  <!-- Floating WhatsApp -->
+  <!-- Floating WhatsApp Button (from your index style) -->
   <a href="https://wa.me/16478485997?text=Hi%20Reserve" target="_blank" rel="noopener noreferrer" class="fixed right-6 bottom-6 bg-green-500 hover:bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50" aria-label="WhatsApp">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.65-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.346.446-.52.151-.177.201-.297.302-.495.1-.197.05-.371-.025-.52-.075-.15-.67-1.612-.918-2.204-.242-.57-.487-.493-.67-.503l-.57-.01c-.197 0-.52.075-.792.371s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.077c.15.197 2.095 3.2 5.076 4.487 1.413.61 2.514.974 3.381 1.247 1.42.452 2.717.388 3.743.235.114-.033.36-.146.412-.289.05-.14.05-.52.035-.72-.015-.197-.18-.297-.397-.444z" fill="white"/></svg>
   </a>
@@ -96,7 +96,7 @@
   <script>
     let rawListings = [];
     let map, markersLayer;
-    let geocodeCache = new Map();
+    const geocodeCache = new Map();
 
     const resultMeta = document.getElementById('resultMeta');
     const filterForm = document.getElementById('filterForm');
@@ -106,7 +106,7 @@
     const typeInput = document.getElementById('type');
 
     function initMap() {
-      map = L.map('map', { zoomControl: true }).setView([18.6, -69.9], 7);
+      map = L.map('map', { zoomControl: true }).setView([18.7357, -70.1627], 7);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap'
@@ -121,46 +121,45 @@
       return Array.isArray(data?.listings) ? data.listings : [];
     }
 
-    function normalizeText(v) {
+    function normalize(v) {
       return String(v || '').trim().toLowerCase();
     }
 
     function detectPurpose(p) {
-      const value = normalizeText(p.saleOrRent || p.purpose || p.listingType);
+      const value = normalize(p.saleOrRent || p.purpose || p.listingType);
       if (value.includes('rent')) return 'rent';
       if (value.includes('sale')) return 'sale';
       return '';
     }
 
     function detectType(p) {
-      return normalizeText(p.type || p.propertyType || '');
+      return normalize(p.type || p.propertyType || '');
     }
 
     function matchesFilters(p) {
-      const q = normalizeText(qInput.value);
-      const purpose = normalizeText(purposeInput.value);
-      const type = normalizeText(typeInput.value);
+      const q = normalize(qInput.value);
+      const purpose = normalize(purposeInput.value);
+      const type = normalize(typeInput.value);
 
       const haystack = [
         p.id, p.title, p.location, p.country, p.city, p.type, p.description
-      ].map(normalizeText).join(' | ');
+      ].map(normalize).join(' | ');
 
       if (q && !haystack.includes(q)) return false;
       if (purpose && detectPurpose(p) !== purpose) return false;
       if (type && !detectType(p).includes(type)) return false;
-
       return true;
     }
 
     async function geocodeLocation(query) {
-      const key = normalizeText(query);
+      const key = normalize(query);
       if (!key) return null;
       if (geocodeCache.has(key)) return geocodeCache.get(key);
 
       try {
         const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
-        const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-        if (!res.ok) throw new Error('Geocoder error');
+        const res = await fetch(url, { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error('Geocode failed');
         const data = await res.json();
         const point = data?.[0] ? { lat: Number(data[0].lat), lng: Number(data[0].lon) } : null;
         geocodeCache.set(key, point);
@@ -171,6 +170,12 @@
       }
     }
 
+    async function getCoordinates(p) {
+      if (p.lat != null && p.lng != null) return { lat: Number(p.lat), lng: Number(p.lng) };
+      const guess = [p.location, p.city, p.country].filter(Boolean).join(', ');
+      return geocodeLocation(guess);
+    }
+
     function popupHtml(p) {
       const title = p.title || 'Property';
       const location = p.location || 'Location not specified';
@@ -179,8 +184,9 @@
       const suffix = purpose === 'rent' ? '/mo' : '';
       const id = encodeURIComponent(p.id || '');
       const waText = encodeURIComponent(`Hi Reserve, I'm interested in ${title}`);
+
       return `
-        <div class="p-1 min-w-[220px]">
+        <div class="p-1 min-w-[230px]">
           <div style="font-weight:700;font-size:15px;line-height:1.2;margin-bottom:4px;">${title}</div>
           <div style="font-size:13px;color:#555;margin-bottom:6px;">${location}</div>
           <div style="font-weight:600;margin-bottom:8px;">$${price.toLocaleString()} ${suffix}</div>
@@ -192,12 +198,6 @@
       `;
     }
 
-    async function getCoordinates(p) {
-      if (p.lat && p.lng) return { lat: Number(p.lat), lng: Number(p.lng) };
-      const guess = [p.location, p.city, p.country].filter(Boolean).join(', ');
-      return await geocodeLocation(guess);
-    }
-
     async function renderMap() {
       markersLayer.clearLayers();
 
@@ -207,7 +207,7 @@
       const bounds = [];
       for (const p of filtered) {
         const coords = await getCoordinates(p);
-        if (!coords) continue;
+        if (!coords || Number.isNaN(coords.lat) || Number.isNaN(coords.lng)) continue;
 
         const marker = L.circleMarker([coords.lat, coords.lng], {
           radius: 8,
@@ -225,7 +225,7 @@
       if (bounds.length) {
         map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
       } else {
-        map.setView([18.6, -69.9], 7);
+        map.setView([18.7357, -70.1627], 7);
       }
     }
 
