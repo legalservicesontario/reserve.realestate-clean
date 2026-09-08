@@ -1,64 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Property Map — Reserve.RealEstate</title>
+  <meta name="description" content="Interactive property map for Reserve.RealEstate listings in Dominican Republic and Costa Rica." />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    :root{--gold:#c8a96a;--cream:#f8f6f0;}
-    body{margin:0;background:var(--cream);color:#111;font-family:'Inter',sans-serif;}
-    h1,h2{font-family:'Cormorant Garamond',serif;}
-    #map{height:calc(100vh - 240px);}    
-    .gold{color:var(--gold);}  
+    :root { --gold:#c8a96a; --cream:#f8f6f0; --dark:#111; }
+    body { margin:0; background:var(--cream); color:var(--dark); font-family:'Inter',sans-serif; }
+    h1,h2,h3 { font-family:'Cormorant Garamond',serif; }
+    .gold { color:var(--gold); }
+    #map { height: calc(100vh - 340px); min-height: 480px; }
+    .leaflet-popup-content-wrapper { border-radius: 14px; }
+    .leaflet-popup-content { margin: 12px 14px; }
   </style>
 </head>
 <body>
-  <nav class="bg-white border-b sticky top-0 z-40 flex justify-between items-center px-8 py-4 shadow-md">
-    <a href="index.html" class="text-2xl font-bold">RESERVE<span class="gold">REALESTATE</span></a>
-    <div class="hidden md:flex gap-6">
-      <a href="index.html" class="hover:text-[#c8a96a]">Home</a>
-      <a href="map.html" class="gold font-semibold">Map</a>
-      <a href="commercial.html" class="hover:text-[#c8a96a]">Commercial</a>
-      <a href="agents.html" class="hover:text-[#c8a96a]">Agents</a>
-      <a href="post-property.html" class="hover:text-[#c8a96a]">List Property</a>
+
+  <!-- Header -->
+  <nav class="bg-white border-b sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      <a href="index.html" class="text-2xl font-bold tracking-wide">
+        RESERVE<span class="gold">REALESTATE</span>
+      </a>
+
+      <div class="hidden md:flex gap-6 text-sm items-center">
+        <a href="index.html" class="hover:text-[#c8a96a]">Home</a>
+        <a href="map.html" class="gold font-semibold">Map</a>
+        <a href="commercial.html" class="hover:text-[#c8a96a]">Commercial</a>
+        <a href="agents.html" class="hover:text-[#c8a96a]">Agents</a>
+        <a href="post-property.html" class="hover:text-[#c8a96a]">List Property</a>
+        <a href="https://wa.me/16478485997?text=Hi%20Reserve,%20I%27m%20interested%20in%20a%20property" target="_blank" rel="noopener noreferrer" class="text-green-600 font-semibold hover:underline">WhatsApp</a>
+      </div>
     </div>
   </nav>
 
-  <div class="max-w-7xl mx-auto px-8 py-6">
+  <!-- Title -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
     <h1 class="text-4xl mb-2">Interactive Property Map</h1>
-    <p class="text-gray-600 mb-4">Explore listings across our Caribbean destinations. Click markers for details and property links.</p>
-  </div>
+    <p class="text-gray-600">Explore listings across our Caribbean destinations. Use search and filters, then click markers for details.</p>
+  </section>
 
-  <div id="map" class="rounded-lg overflow-hidden mx-8"></div>
+  <!-- Filters -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-4">
+    <form id="filterForm" class="bg-white border border-gray-200 rounded-2xl p-3 sm:p-4 shadow-sm grid gap-3 sm:grid-cols-[1fr_auto_auto_auto] items-center">
+      <input id="q" type="text" placeholder="Search city, location, title, or listing id..." class="w-full h-11 border border-gray-200 rounded-lg px-3 outline-none focus:border-black" />
+
+      <select id="purpose" class="h-11 border border-gray-200 rounded-lg px-3 outline-none focus:border-black">
+        <option value="">Any purpose</option>
+        <option value="sale">For Sale</option>
+        <option value="rent">For Rent</option>
+      </select>
+
+      <select id="type" class="h-11 border border-gray-200 rounded-lg px-3 outline-none focus:border-black">
+        <option value="">Any type</option>
+        <option value="villa">Villa</option>
+        <option value="condo">Condo</option>
+        <option value="apartment">Apartment</option>
+        <option value="commercial">Commercial</option>
+        <option value="land">Land</option>
+      </select>
+
+      <button type="submit" class="h-11 px-5 rounded-lg bg-black text-white font-semibold hover:bg-gray-800">
+        Apply
+      </button>
+    </form>
+
+    <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
+      <p id="resultMeta">Loading listings...</p>
+      <button id="resetBtn" type="button" class="text-[#c8a96a] font-semibold hover:underline">Reset filters</button>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
+    <div id="map" class="rounded-xl overflow-hidden border border-gray-200 shadow-sm"></div>
+  </section>
 
   <footer class="bg-black text-gray-400 text-center py-8 mt-8">
     <div class="text-white text-xl tracking-[4px] mb-3">RESERVE.REALESTATE</div>
     <p>© 2026 Reserve.RealEstate All Rights Reserved.</p>
   </footer>
 
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/16478485997?text=Hi%20Reserve" target="_blank" rel="noopener noreferrer" class="fixed right-6 bottom-6 bg-green-500 hover:bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.65-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.346.446-.52.151-.177.201-.297.302-.495.1-.197.05-.371-.025-.52-.075-.15-.67-1.612-.918-2.204-.242-.57-.487-.493-.67-.503l-.57-.01c-.197 0-.52.075-.792.371s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.077c.15.197 2.095 3.2 5.076 4.487 1.413.61 2.514.974 3.381 1.247 1.42.452 2.717.388 3.743.235.114-.033.36-.146.412-.289.05-.14.05-.52.035-.72-.015-.197-.18-.297-.397-.444z" fill="white"/></svg>
+  </a>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    async function loadMap(){
-      try{
-        const res = await fetch('data/properties.json');
-        const data = await res.json();
-        const map = L.map('map').setView([18.6, -69.9], 8);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+    let rawListings = [];
+    let map, markersLayer;
+    let geocodeCache = new Map();
 
-        data.listings.forEach(p => {
-          if(p.lat && p.lng){
-            const marker = L.circleMarker([p.lat,p.lng],{radius:8,fillColor:'#c8a96a',color:'#fff',weight:2,opacity:1,fillOpacity:0.8}).addTo(map);
-            marker.bindPopup(`<div class="p-3"><strong>${p.title}</strong><br>${p.location}<br>$${p.price.toLocaleString()} ${p.saleOrRent=='rent'?'/mo':''}<br><a href="property.html?id=${p.id}" class="text-blue-600 underline">View details</a></div>`);
-          }
-        });
-      }catch(err){
-        console.error('Map error:', err);
+    const resultMeta = document.getElementById('resultMeta');
+    const filterForm = document.getElementById('filterForm');
+    const resetBtn = document.getElementById('resetBtn');
+    const qInput = document.getElementById('q');
+    const purposeInput = document.getElementById('purpose');
+    const typeInput = document.getElementById('type');
+
+    function initMap() {
+      map = L.map('map', { zoomControl: true }).setView([18.6, -69.9], 7);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+      markersLayer = L.layerGroup().addTo(map);
+    }
+
+    async function fetchListings() {
+      const res = await fetch('data/properties.json');
+      if (!res.ok) throw new Error('Could not load data/properties.json');
+      const data = await res.json();
+      return Array.isArray(data?.listings) ? data.listings : [];
+    }
+
+    function normalizeText(v) {
+      return String(v || '').trim().toLowerCase();
+    }
+
+    function detectPurpose(p) {
+      const value = normalizeText(p.saleOrRent || p.purpose || p.listingType);
+      if (value.includes('rent')) return 'rent';
+      if (value.includes('sale')) return 'sale';
+      return '';
+    }
+
+    function detectType(p) {
+      return normalizeText(p.type || p.propertyType || '');
+    }
+
+    function matchesFilters(p) {
+      const q = normalizeText(qInput.value);
+      const purpose = normalizeText(purposeInput.value);
+      const type = normalizeText(typeInput.value);
+
+      const haystack = [
+        p.id, p.title, p.location, p.country, p.city, p.type, p.description
+      ].map(normalizeText).join(' | ');
+
+      if (q && !haystack.includes(q)) return false;
+      if (purpose && detectPurpose(p) !== purpose) return false;
+      if (type && !detectType(p).includes(type)) return false;
+
+      return true;
+    }
+
+    async function geocodeLocation(query) {
+      const key = normalizeText(query);
+      if (!key) return null;
+      if (geocodeCache.has(key)) return geocodeCache.get(key);
+
+      try {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
+        const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!res.ok) throw new Error('Geocoder error');
+        const data = await res.json();
+        const point = data?.[0] ? { lat: Number(data[0].lat), lng: Number(data[0].lon) } : null;
+        geocodeCache.set(key, point);
+        return point;
+      } catch {
+        geocodeCache.set(key, null);
+        return null;
       }
     }
-    loadMap();
+
+    function popupHtml(p) {
+      const title = p.title || 'Property';
+      const location = p.location || 'Location not specified';
+      const price = Number(p.price || 0);
+      const purpose = detectPurpose(p);
+      const suffix = purpose === 'rent' ? '/mo' : '';
+      const id = encodeURIComponent(p.id || '');
+      const waText = encodeURIComponent(`Hi Reserve, I'm interested in ${title}`);
+      return `
+        <div class="p-1 min-w-[220px]">
+          <div style="font-weight:700;font-size:15px;line-height:1.2;margin-bottom:4px;">${title}</div>
+          <div style="font-size:13px;color:#555;margin-bottom:6px;">${location}</div>
+          <div style="font-weight:600;margin-bottom:8px;">$${price.toLocaleString()} ${suffix}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="property.html?id=${id}" style="font-size:12px;color:#2563eb;text-decoration:underline;">View details</a>
+            <a href="https://wa.me/16478485997?text=${waText}" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#16a34a;font-weight:600;text-decoration:underline;">WhatsApp</a>
+          </div>
+        </div>
+      `;
+    }
+
+    async function getCoordinates(p) {
+      if (p.lat && p.lng) return { lat: Number(p.lat), lng: Number(p.lng) };
+      const guess = [p.location, p.city, p.country].filter(Boolean).join(', ');
+      return await geocodeLocation(guess);
+    }
+
+    async function renderMap() {
+      markersLayer.clearLayers();
+
+      const filtered = rawListings.filter(matchesFilters);
+      resultMeta.textContent = `${filtered.length} listing(s) found`;
+
+      const bounds = [];
+      for (const p of filtered) {
+        const coords = await getCoordinates(p);
+        if (!coords) continue;
+
+        const marker = L.circleMarker([coords.lat, coords.lng], {
+          radius: 8,
+          fillColor: '#c8a96a',
+          color: '#fff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.9
+        }).addTo(markersLayer);
+
+        marker.bindPopup(popupHtml(p));
+        bounds.push([coords.lat, coords.lng]);
+      }
+
+      if (bounds.length) {
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+      } else {
+        map.setView([18.6, -69.9], 7);
+      }
+    }
+
+    async function init() {
+      initMap();
+      try {
+        rawListings = await fetchListings();
+        await renderMap();
+      } catch (err) {
+        console.error('Map error:', err);
+        resultMeta.textContent = 'Error loading listings. Please check data/properties.json.';
+      }
+    }
+
+    filterForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await renderMap();
+    });
+
+    qInput.addEventListener('input', async () => {
+      await renderMap();
+    });
+
+    resetBtn.addEventListener('click', async () => {
+      qInput.value = '';
+      purposeInput.value = '';
+      typeInput.value = '';
+      await renderMap();
+    });
+
+    init();
   </script>
 </body>
 </html>
