@@ -57,12 +57,28 @@
     </div>
   </div>
 
+  <script src="js/property-map.js"></script>
   <script>
-    const PROPERTY_PAGE_MAP = {
-      'dr-cocotal-villa': 'property-cocotal-villa.html',
-      'dr-los-corales-condo': 'property-los-corales-condo.html',
-      'cr-tamarindo-villa': 'property-tamarindo-villa.html'
-    };
+    // Fallback if property-map.js is not loaded
+    if (typeof PROPERTY_PAGE_MAP === 'undefined') {
+      window.PROPERTY_PAGE_MAP = {
+        'cr-tamarindo-villa': 'property-tamarindo-villa.html',
+        'dr-cocotal-villa': 'property-cocotal-villa.html',
+        'dr-los-corales-condo': 'property-los-corales-condo.html',
+        'villa-tamarindo-01': 'property-tamarindo-villa.html',
+        'penthouse-cabarete-02': 'property-cocotal-villa.html',
+        'condo-sosua-03': 'property-los-corales-condo.html',
+        'villa-puertoplata-04': 'property.html?id=villa-puertoplata-04',
+        'condo-tamarindo-05': 'property.html?id=condo-tamarindo-05'
+      };
+    }
+
+    if (typeof getPropertyHref === 'undefined') {
+      window.getPropertyHref = function(id) {
+        if (!id) return 'property.html';
+        return window.PROPERTY_PAGE_MAP[id] || `property.html?id=${encodeURIComponent(id)}`;
+      };
+    }
 
     // Check if user is logged in
     window.addEventListener('DOMContentLoaded', () => {
@@ -87,10 +103,6 @@
       event.currentTarget.classList.add('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]');
     }
 
-    function getPropertyHref(id){
-      return PROPERTY_PAGE_MAP[id] || `property.html?id=${encodeURIComponent(id)}`;
-    }
-
     async function loadSavedListings(){
       try{
         const saved = JSON.parse(localStorage.getItem('savedListings')) || [];
@@ -103,7 +115,10 @@
         const data = await res.json();
         const savedListings = document.getElementById('savedListings');
 
-        const properties = (data.listings || []).filter(p => saved.includes(p.id));
+        const properties = (data.listings || []).filter(p => {
+          const alias = typeof PROPERTY_ID_ALIASES !== 'undefined' ? PROPERTY_ID_ALIASES[p.id] : null;
+          return saved.includes(p.id) || (alias && saved.includes(alias));
+        });
         if (properties.length === 0) {
           savedListings.innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No matching saved properties found.</p>';
           return;
@@ -128,7 +143,8 @@
 
     function removeSaved(propertyId){
       let saved = JSON.parse(localStorage.getItem('savedListings')) || [];
-      saved = saved.filter(id => id !== propertyId);
+      const alias = typeof PROPERTY_ID_ALIASES !== 'undefined' ? PROPERTY_ID_ALIASES[propertyId] : null;
+      saved = saved.filter(id => id !== propertyId && id !== alias);
       localStorage.setItem('savedListings', JSON.stringify(saved));
       loadSavedListings();
     }
