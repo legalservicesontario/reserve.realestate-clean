@@ -58,7 +58,7 @@
           </select>
           <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-harbor-500">▾</span>
         </label>
-        <a class="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-harbor-700 hover:text-harbor-950" href="dashboard.html">Dashboard</a>
+        <a id="dashboardLink" class="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-harbor-700 hover:text-harbor-950" href="dashboard.html">Dashboard</a>
         <a class="px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors" href="post-property.html">Contact Agent</a>
       </div>
     </div>
@@ -195,6 +195,77 @@
       </div>
     </div>
   </footer>
+
+  <div id="loginModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold text-harbor-900">Login to Reserve</h3>
+        <button id="closeLoginModal" class="text-harbor-500 hover:text-harbor-900 text-xl leading-none">&times;</button>
+      </div>
+      <p class="text-sm text-harbor-600 mb-4">Access your dashboard, saved listings, and profile.</p>
+
+      <form id="loginForm" class="space-y-3">
+        <div>
+          <label for="loginEmail" class="block text-sm font-medium text-harbor-800 mb-1">Email</label>
+          <input id="loginEmail" type="email" required placeholder="you@example.com" class="w-full h-11 rounded-lg border border-harbor-200 px-3 outline-none focus:border-tide-700" />
+        </div>
+        <div>
+          <label for="loginPassword" class="block text-sm font-medium text-harbor-800 mb-1">Password</label>
+          <input id="loginPassword" type="password" required placeholder="••••••••" class="w-full h-11 rounded-lg border border-harbor-200 px-3 outline-none focus:border-tide-700" />
+        </div>
+
+        <button type="submit" class="w-full h-11 rounded-lg bg-tide-700 hover:bg-tide-800 text-white font-semibold">Continue</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const dashboardLink = document.getElementById('dashboardLink');
+      const modal = document.getElementById('loginModal');
+      const closeBtn = document.getElementById('closeLoginModal');
+      const form = document.getElementById('loginForm');
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      if (dashboardLink) {
+        dashboardLink.addEventListener('click', function (e) {
+          const userEmail = localStorage.getItem('userEmail');
+          if (!userEmail) {
+            e.preventDefault();
+            openModal();
+          }
+        });
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        if (!email || !password) return;
+
+        localStorage.setItem('userEmail', email);
+        if (!localStorage.getItem('savedListings')) {
+          localStorage.setItem('savedListings', JSON.stringify([]));
+        }
+
+        window.location.href = 'dashboard.html';
+      });
+    })();
+  </script>
 
 </body>
 </html>

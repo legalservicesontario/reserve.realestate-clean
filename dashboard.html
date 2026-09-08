@@ -27,9 +27,9 @@
   <div class="max-w-6xl mx-auto px-8 py-12">
     <!-- TABS -->
     <div class="flex gap-6 mb-8 border-b">
-      <button onclick="showTab('saved')" class="py-3 px-4 font-semibold border-b-2 border-[#c8a96a] text-[#c8a96a]">Saved Listings</button>
-      <button onclick="showTab('profile')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">My Profile</button>
-      <button onclick="showTab('messages')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">Messages</button>
+      <button onclick="showTab(event, 'saved')" class="py-3 px-4 font-semibold border-b-2 border-[#c8a96a] text-[#c8a96a]">Saved Listings</button>
+      <button onclick="showTab(event, 'profile')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">My Profile</button>
+      <button onclick="showTab(event, 'messages')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">Messages</button>
     </div>
 
     <!-- SAVED LISTINGS TAB -->
@@ -71,35 +71,40 @@
       loadProfile();
     });
 
-    function showTab(tabName){
+    function showTab(event, tabName){
       // Hide all tabs
       document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('button').forEach(el => el.classList.remove('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]'));
-      
+      document.querySelectorAll('[onclick^="showTab"]').forEach(el => el.classList.remove('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]'));
+
       // Show selected tab
       document.getElementById(tabName + '-tab').style.display = 'block';
-      event.target.classList.add('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]');
+      event.currentTarget.classList.add('border-b-2', 'border-[#c8a96a]', 'text-[#c8a96a]');
     }
 
     async function loadSavedListings(){
       try{
         const saved = JSON.parse(localStorage.getItem('savedListings')) || [];
         if(saved.length === 0){
-          document.getElementById('savedListings').innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html#properties" class="text-[#c8a96a] font-semibold">Browse properties</a></p>';
+          document.getElementById('savedListings').innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html" class="text-[#c8a96a] font-semibold">Browse properties</a></p>';
           return;
         }
 
         const res = await fetch('data/properties.json');
         const data = await res.json();
         const savedListings = document.getElementById('savedListings');
-        
-        const properties = data.listings.filter(p => saved.includes(p.id));
+
+        const properties = (data.listings || []).filter(p => saved.includes(p.id));
+        if (properties.length === 0) {
+          savedListings.innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No matching saved properties found.</p>';
+          return;
+        }
+
         savedListings.innerHTML = properties.map(p => `
           <div class="card overflow-hidden hover:shadow-lg transition">
-            <img src="${p.images[0]}" alt="${p.title}" class="w-full h-48 object-cover rounded-lg mb-4">
+            <img src="${p.images?.[0] || ''}" alt="${p.title}" class="w-full h-48 object-cover rounded-lg mb-4">
             <h3 class="text-xl font-semibold mb-2">${p.title}</h3>
             <p class="text-[#c8a96a] uppercase text-sm mb-3">${p.location}</p>
-            <p class="text-2xl font-bold mb-4">$${p.price.toLocaleString()}</p>
+            <p class="text-2xl font-bold mb-4">$${Number(p.price || 0).toLocaleString()}</p>
             <div class="flex gap-4">
               <a href="property.html?id=${p.id}" class="flex-1 bg-[#c8a96a] text-black text-center py-2 rounded-lg hover:bg-[#b39657] font-semibold">View</a>
               <button onclick="removeSaved('${p.id}')" class="flex-1 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-50 font-semibold">Remove</button>
