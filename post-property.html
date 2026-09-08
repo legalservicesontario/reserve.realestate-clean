@@ -1,37 +1,292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Post Your Property — Reserve Real Estate</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Property | reserve.realestate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #111111;
+      --border-color: #e2e8f0;
+      --focus-ring: #000000;
+      --accent: #111111;
+      --font-main: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Logo Header */
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      border-bottom: 2px solid #111;
+      padding-bottom: 1.5rem;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-transform: lowercase;
+      color: #000000;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .logo span {
+      font-weight: 300;
+      color: #555555;
+    }
+
+    .subtitle {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      background-color: #fff;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--focus-ring);
+    }
+
+    /* Custom File Input Box */
+    .file-input-wrapper {
+      border: 2px dashed var(--border-color);
+      padding: 2rem 1rem;
+      text-align: center;
+      border-radius: 4px;
+      background: #fafafa;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .file-input-wrapper:hover {
+      border-color: #000;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .file-label-text {
+      font-size: 0.9rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .file-name-display {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #000;
+      font-weight: 600;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background-color: #000000;
+      color: #ffffff;
+      padding: 1rem;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-main);
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #333333;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen">
-  <header class="bg-white border-b sticky top-0 z-40">
-    <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-xl font-bold">RESERVE.REALESTATE</a>
-      <nav class="hidden md:flex gap-5 text-sm">
-        <a href="index.html">Home</a>
-        <a href="map.html">Map</a>
-        <a href="commercial.html">Commercial</a>
-        <a href="agents.html">Agents</a>
-        <a href="post-property.html" class="font-semibold">List Property</a>
-      </nav>
-    </div>
-  </header>
+<body>
 
-  <main class="mx-auto max-w-3xl px-4 py-8">
-    <h1 class="text-2xl font-bold">Post Your Property</h1>
-    <p class="text-sm text-gray-600">Landlords and sellers: submit your listing and we will contact you to confirm details.</p>
+  <div class="container">
+    <!-- Header with logo -->
+    <header class="header">
+      <div class="logo">reserve<span>.realestate</span></div>
+      <p class="subtitle">Property Submission Portal</p>
+    </header>
 
-    <form action="https://formspree.io/f/xdeownje" method="POST" class="mt-4 bg-white p-4 rounded shadow grid gap-3">
-      <input type="text" name="name" placeholder="Full name" required class="p-3 border rounded" />
-      <input type="email" name="email" placeholder="Email" required class="p-3 border rounded" />
-      <input type="tel" name="phone" placeholder="Phone" class="p-3 border rounded" />
-      <input type="text" name="title" placeholder="Listing title (e.g. Beachfront 3BR Villa)" class="p-3 border rounded" />
-      <textarea name="message" rows="5" placeholder="Details, price, location, any images (links)" class="p-3 border rounded"></textarea>
-      <button type="submit" class="px-4 py-2 bg-black text-white rounded">Submit Listing</button>
+    <!-- Formspree Form -->
+    <form action="https://formspree.io/f/xdeownje" method="POST" enctype="multipart/form-data">
+      
+      <!-- Listing Type -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="listingType">Listing Purpose *</label>
+          <select id="listingType" name="Listing Type" required>
+            <option value="" disabled selected>Select Type</option>
+            <option value="For Sale">For Sale</option>
+            <option value="For Rent">For Rent</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="propertyType">Property Category *</label>
+          <select id="propertyType" name="Property Category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Land / Development">Land / Development</option>
+            <option value="Luxury Villa / Resort">Luxury Villa / Resort</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Address / Location -->
+      <div class="form-group">
+        <label for="address">Property Address / Location *</label>
+        <input type="text" id="address" name="Property Address" placeholder="123 Ocean Drive, City, Country" required>
+      </div>
+
+      <!-- Price & Specs -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="price">Price (USD) *</label>
+          <input type="number" id="price" name="Price" placeholder="e.g. 450000" required>
+        </div>
+        <div class="form-group">
+          <label for="bedrooms">Bedrooms</label>
+          <input type="number" id="bedrooms" name="Bedrooms" placeholder="e.g. 3">
+        </div>
+        <div class="form-group">
+          <label for="bathrooms">Bathrooms</label>
+          <input type="number" step="0.5" id="bathrooms" name="Bathrooms" placeholder="e.g. 2.5">
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Property Description & Key Features *</label>
+        <textarea id="description" name="Property Description" rows="5" placeholder="Include property highlights, amenities, parking, square footage, lease terms, etc." required></textarea>
+      </div>
+
+      <!-- File Upload section -->
+      <div class="form-group">
+        <label>Property Photos</label>
+        <div class="file-input-wrapper" onclick="document.getElementById('photos').click();">
+          <div class="file-label-text">📷 Click to upload high-res property images</div>
+          <input type="file" id="photos" name="attachment" multiple accept="image/*" onchange="updateFileNameDisplay(this)">
+          <div class="file-name-display" id="fileNameDisplay"></div>
+        </div>
+      </div>
+
+      <hr style="border: none; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+      <!-- Contact Info -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contactName">Your Name *</label>
+          <input type="text" id="contactName" name="Contact Name" required>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Your Email *</label>
+          <input type="email" id="contactEmail" name="_replyto" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactPhone">Phone Number</label>
+        <input type="tel" id="contactPhone" name="Contact Phone" placeholder="+1 (555) 000-0000">
+      </div>
+
+      <!-- Formspree settings -->
+      <input type="hidden" name="_subject" value="New Property Submission - reserve.realestate">
+
+      <button type="submit">Submit Property</button>
     </form>
-  </main>
+  </div>
+
+  <script>
+    function updateFileNameDisplay(input) {
+      const display = document.getElementById('fileNameDisplay');
+      if (input.files && input.files.length > 0) {
+        display.textContent = `${input.files.length} file(s) selected: ` + 
+          Array.from(input.files).map(f => f.name).join(', ');
+      } else {
+        display.textContent = '';
+      }
+    }
+  </script>
 </body>
 </html>
