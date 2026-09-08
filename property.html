@@ -44,6 +44,7 @@
     <p class="mt-5">© 2026 Reserve.RealEstate All Rights Reserved.</p>
   </footer>
 
+  <script src="js/property-map.js"></script>
   <script>
     function qParam(name){ const url = new URL(window.location.href); return url.searchParams.get(name); }
     
@@ -52,7 +53,8 @@
         const id = qParam('id');
         const res = await fetch('data/properties.json');
         const data = await res.json();
-        const property = data.listings.find(x=>x.id===id) || data.listings[0];
+        const alias = (typeof PROPERTY_ID_ALIASES !== 'undefined' && id) ? PROPERTY_ID_ALIASES[id] : null;
+        const property = (data.listings || []).find(x => x.id === id || (alias && x.id === alias)) || data.listings[0];
         const container = document.getElementById('property-content');
         
         if(!property){
