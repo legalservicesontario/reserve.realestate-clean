@@ -12,6 +12,14 @@
     h1,h2{font-family:'Cormorant Garamond',serif;}
     .gold{color:var(--gold);}
     .card{background:white;border-radius:20px;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:20px;}
+    .form-input{width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;transition:border-color 0.3s;}
+    .form-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,106,0.1);}
+    .form-input.error{border-color:#ef4444;}
+    .password-requirement{display:flex;align-items:center;font-size:13px;margin:8px 0;color:#6b7280;}
+    .password-requirement.met{color:#10b981;}
+    .requirement-icon{margin-right:8px;width:16px;height:16px;display:flex;align-items:center;justify-content:center;}
+    .error-message{color:#ef4444;font-size:13px;margin-top:6px;}
+    .success-message{color:#10b981;font-size:13px;margin-top:6px;}
   </style>
 </head>
 <body>
@@ -26,10 +34,11 @@
 
   <div class="max-w-6xl mx-auto px-8 py-12">
     <!-- TABS -->
-    <div class="flex gap-6 mb-8 border-b">
-      <button onclick="showTab(event, 'saved')" class="py-3 px-4 font-semibold border-b-2 border-[#c8a96a] text-[#c8a96a]">Saved Listings</button>
-      <button onclick="showTab(event, 'profile')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">My Profile</button>
-      <button onclick="showTab(event, 'messages')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a]">Messages</button>
+    <div class="flex gap-6 mb-8 border-b overflow-x-auto">
+      <button onclick="showTab(event, 'saved')" class="py-3 px-4 font-semibold border-b-2 border-[#c8a96a] text-[#c8a96a] whitespace-nowrap">Saved Listings</button>
+      <button onclick="showTab(event, 'profile')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a] whitespace-nowrap">My Profile</button>
+      <button onclick="showTab(event, 'signup')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a] whitespace-nowrap">Sign Up</button>
+      <button onclick="showTab(event, 'messages')" class="py-3 px-4 font-semibold text-gray-600 hover:text-[#c8a96a] whitespace-nowrap">Messages</button>
     </div>
 
     <!-- SAVED LISTINGS TAB -->
@@ -45,6 +54,130 @@
         <div id="profileContent" class="space-y-4">
           <p class="text-gray-600">Loading profile...</p>
         </div>
+      </div>
+    </div>
+
+    <!-- SIGN UP TAB -->
+    <div id="signup-tab" class="tab-content" style="display:none;">
+      <h2 class="text-3xl font-bold mb-8">Create New Account</h2>
+      <div class="card max-w-2xl">
+        <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-6">
+          <!-- Full Name -->
+          <div>
+            <label for="fullName" class="block text-sm font-semibold mb-2">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe" class="form-input" required>
+            <span class="error-message" id="fullNameError"></span>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="signupEmail" class="block text-sm font-semibold mb-2">Email Address</label>
+            <input type="email" id="signupEmail" name="email" placeholder="you@example.com" class="form-input" required>
+            <span class="error-message" id="emailError"></span>
+          </div>
+
+          <!-- Phone Number -->
+          <div>
+            <label for="phone" class="block text-sm font-semibold mb-2">Phone Number (Optional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" class="form-input">
+            <span class="error-message" id="phoneError"></span>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label for="signupPassword" class="block text-sm font-semibold mb-2">Password</label>
+            <input type="password" id="signupPassword" name="password" placeholder="Enter a strong password" class="form-input" required oninput="validatePassword()">
+            <span class="error-message" id="passwordError"></span>
+            
+            <!-- Password Requirements -->
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+              <p class="text-xs font-semibold text-gray-700 mb-3">Password Requirements:</p>
+              <div class="password-requirement" id="req-length">
+                <div class="requirement-icon">✓</div>
+                <span>At least 8 characters</span>
+              </div>
+              <div class="password-requirement" id="req-uppercase">
+                <div class="requirement-icon">✓</div>
+                <span>One uppercase letter</span>
+              </div>
+              <div class="password-requirement" id="req-lowercase">
+                <div class="requirement-icon">✓</div>
+                <span>One lowercase letter</span>
+              </div>
+              <div class="password-requirement" id="req-number">
+                <div class="requirement-icon">✓</div>
+                <span>One number</span>
+              </div>
+              <div class="password-requirement" id="req-special">
+                <div class="requirement-icon">✓</div>
+                <span>One special character (!@#$%^&*)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div>
+            <label for="confirmPassword" class="block text-sm font-semibold mb-2">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" class="form-input" required oninput="validatePasswordMatch()">
+            <span class="error-message" id="confirmPasswordError"></span>
+          </div>
+
+          <!-- Address (Optional) -->
+          <div>
+            <label for="address" class="block text-sm font-semibold mb-2">Address (Optional)</label>
+            <input type="text" id="address" name="address" placeholder="123 Main Street" class="form-input">
+          </div>
+
+          <!-- City, Province, Postal Code -->
+          <div class="grid md:grid-cols-3 gap-4">
+            <div>
+              <label for="city" class="block text-sm font-semibold mb-2">City</label>
+              <input type="text" id="city" name="city" placeholder="Toronto" class="form-input">
+            </div>
+            <div>
+              <label for="province" class="block text-sm font-semibold mb-2">Province</label>
+              <input type="text" id="province" name="province" placeholder="ON" class="form-input">
+            </div>
+            <div>
+              <label for="postal" class="block text-sm font-semibold mb-2">Postal Code</label>
+              <input type="text" id="postal" name="postal" placeholder="M5V 3A9" class="form-input">
+            </div>
+          </div>
+
+          <!-- Terms & Conditions -->
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="terms" name="terms" required class="mt-1">
+            <label for="terms" class="text-sm text-gray-600">
+              I agree to the <a href="#" class="text-[#c8a96a] font-semibold hover:underline">Terms of Service</a> and <a href="#" class="text-[#c8a96a] font-semibold hover:underline">Privacy Policy</a>
+            </label>
+          </div>
+
+          <!-- Newsletter Opt-in -->
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="newsletter" name="newsletter" class="mt-1">
+            <label for="newsletter" class="text-sm text-gray-600">
+              Send me updates about new properties and exclusive offers
+            </label>
+          </div>
+
+          <!-- Form Messages -->
+          <span class="error-message block" id="formError"></span>
+          <span class="success-message block" id="formSuccess"></span>
+
+          <!-- Buttons -->
+          <div class="flex gap-4 pt-4">
+            <button type="submit" class="flex-1 bg-[#c8a96a] text-black py-3 rounded-lg hover:bg-[#b39657] font-semibold transition">
+              Create Account
+            </button>
+            <button type="reset" class="flex-1 border-2 border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 font-semibold transition">
+              Clear
+            </button>
+          </div>
+
+          <p class="text-center text-sm text-gray-600">
+            Already have an account? <a href="index.html" class="text-[#c8a96a] font-semibold hover:underline">Login here</a>
+          </p>
+        </form>
       </div>
     </div>
 
@@ -95,7 +228,7 @@
       try{
         const saved = JSON.parse(localStorage.getItem('savedListings')) || [];
         if(saved.length === 0){
-          document.getElementById('savedListings').innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html" class="text-[#c8a96a] font-semibold">Browse properties</a></p>';
+          document.getElementById('savedListings').innerHTML = '<p class="text-gray-600 col-span-full text-center py-8">No saved listings yet. <a href="index.html" class="text-[#c8a96a] font-semibold"[...]
           return;
         }
 
@@ -147,6 +280,178 @@
       localStorage.removeItem('userEmail');
       localStorage.removeItem('savedListings');
       window.location.href = 'index.html';
+    }
+
+    // SIGN UP FUNCTIONS
+    function validatePassword(){
+      const password = document.getElementById('signupPassword').value;
+      const requirements = {
+        'req-length': password.length >= 8,
+        'req-uppercase': /[A-Z]/.test(password),
+        'req-lowercase': /[a-z]/.test(password),
+        'req-number': /\d/.test(password),
+        'req-special': /[!@#$%^&*]/.test(password)
+      };
+
+      Object.keys(requirements).forEach(id => {
+        const el = document.getElementById(id);
+        if(requirements[id]){
+          el.classList.add('met');
+          el.querySelector('.requirement-icon').textContent = '✓';
+        } else {
+          el.classList.remove('met');
+          el.querySelector('.requirement-icon').textContent = '○';
+        }
+      });
+
+      validatePasswordMatch();
+    }
+
+    function validatePasswordMatch(){
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const error = document.getElementById('confirmPasswordError');
+
+      if(confirmPassword && password !== confirmPassword){
+        error.textContent = 'Passwords do not match';
+        document.getElementById('confirmPassword').classList.add('error');
+      } else {
+        error.textContent = '';
+        document.getElementById('confirmPassword').classList.remove('error');
+      }
+    }
+
+    function validateEmail(email){
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function validatePhone(phone){
+      if(!phone) return true; // Optional field
+      const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+      return phoneRegex.test(phone.replace(/\s/g, ''));
+    }
+
+    function validatePasswordRequirements(password){
+      return password.length >= 8 &&
+             /[A-Z]/.test(password) &&
+             /[a-z]/.test(password) &&
+             /\d/.test(password) &&
+             /[!@#$%^&*]/.test(password);
+    }
+
+    async function handleSignup(event){
+      event.preventDefault();
+      
+      // Clear previous messages
+      document.getElementById('formError').textContent = '';
+      document.getElementById('formSuccess').textContent = '';
+      
+      // Get form values
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const address = document.getElementById('address').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const province = document.getElementById('province').value.trim();
+      const postal = document.getElementById('postal').value.trim();
+      const termsAccepted = document.getElementById('terms').checked;
+      const newsletter = document.getElementById('newsletter').checked;
+
+      // Validation
+      let hasError = false;
+      
+      if(!fullName || fullName.length < 2){
+        document.getElementById('fullNameError').textContent = 'Please enter a valid full name';
+        document.getElementById('fullName').classList.add('error');
+        hasError = true;
+      } else {
+        document.getElementById('fullNameError').textContent = '';
+        document.getElementById('fullName').classList.remove('error');
+      }
+
+      if(!validateEmail(email)){
+        document.getElementById('emailError').textContent = 'Please enter a valid email address';
+        document.getElementById('signupEmail').classList.add('error');
+        hasError = true;
+      } else {
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('signupEmail').classList.remove('error');
+      }
+
+      if(phone && !validatePhone(phone)){
+        document.getElementById('phoneError').textContent = 'Please enter a valid phone number';
+        document.getElementById('phone').classList.add('error');
+        hasError = true;
+      } else {
+        document.getElementById('phoneError').textContent = '';
+        document.getElementById('phone').classList.remove('error');
+      }
+
+      if(!validatePasswordRequirements(password)){
+        document.getElementById('passwordError').textContent = 'Password does not meet all requirements';
+        document.getElementById('signupPassword').classList.add('error');
+        hasError = true;
+      } else {
+        document.getElementById('passwordError').textContent = '';
+        document.getElementById('signupPassword').classList.remove('error');
+      }
+
+      if(password !== confirmPassword){
+        document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+        document.getElementById('confirmPassword').classList.add('error');
+        hasError = true;
+      } else {
+        document.getElementById('confirmPasswordError').textContent = '';
+        document.getElementById('confirmPassword').classList.remove('error');
+      }
+
+      if(!termsAccepted){
+        document.getElementById('formError').textContent = 'Please accept the Terms of Service and Privacy Policy';
+        hasError = true;
+      }
+
+      if(hasError) return;
+
+      // Check if email already exists
+      const existingAccounts = JSON.parse(localStorage.getItem('accounts') || '[]');
+      if(existingAccounts.some(acc => acc.email === email)){
+        document.getElementById('formError').textContent = 'An account with this email already exists';
+        document.getElementById('signupEmail').classList.add('error');
+        return;
+      }
+
+      // Create account
+      const newAccount = {
+        fullName,
+        email,
+        phone,
+        password: btoa(password), // Simple encoding (use proper hashing in production!)
+        address,
+        city,
+        province,
+        postal,
+        newsletter,
+        createdAt: new Date().toISOString(),
+        savedListings: []
+      };
+
+      existingAccounts.push(newAccount);
+      localStorage.setItem('accounts', JSON.stringify(existingAccounts));
+      
+      // Log in user
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('savedListings', JSON.stringify([]));
+
+      // Show success message
+      document.getElementById('formSuccess').textContent = 'Account created successfully! Redirecting to dashboard...';
+      
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 2000);
     }
   </script>
 </body>
