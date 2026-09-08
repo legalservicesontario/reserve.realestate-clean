@@ -59,7 +59,7 @@
           <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-harbor-500">▾</span>
         </label>
         <a id="dashboardLink" class="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-harbor-700 hover:text-harbor-950" href="dashboard.html">Dashboard</a>
-        <a class="px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors" href="post-property.html">Contact Agent</a>
+        <a class="px-4 py-2 text-sm font-semibold text-white bg-tide-700 hover:bg-tide-800 rounded-lg shadow-sm transition-colors" href="#contact">Contact Agent</a>
       </div>
     </div>
   </header>
@@ -132,7 +132,6 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
         <article class="bg-white rounded-xl shadow-sm border border-harbor-100 overflow-hidden relative group hover:shadow-md transition-shadow">
           <div class="relative aspect-[4/3] bg-harbor-100 overflow-hidden">
             <img alt="Cocotal Golf Villa" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" />
@@ -179,7 +178,28 @@
             <a href="property-tamarindo-villa.html" class="inline-block mt-4 text-sm font-semibold text-tide-700 hover:text-tide-800">View property →</a>
           </div>
         </article>
+      </div>
+    </section>
 
+    <section id="contact" class="mx-auto max-w-7xl px-4 sm:px-6 pb-16">
+      <div class="bg-white p-6 rounded-xl shadow border border-harbor-100">
+        <h3 class="text-xl font-bold text-harbor-900">Contact Reserve Real Estate</h3>
+        <p class="text-sm text-harbor-600 mt-1">
+          Phone:
+          <a href="tel:+16478485997" class="font-semibold hover:underline">+1 647-848-5997</a>
+          ·
+          <a href="https://wa.me/16478485997?text=Hi%20Reserve,%20I%27m%20interested%20in%20a%20property" target="_blank" rel="noopener noreferrer" class="text-green-600 font-semibold hover:underline">WhatsApp</a>
+        </p>
+
+        <!-- Contact form (Formspree) -->
+        <form action="https://formspree.io/f/xdeownje" method="POST" class="mt-4 grid gap-3 max-w-xl">
+          <input type="text" name="name" placeholder="Full name" required class="p-3 border rounded" />
+          <input type="email" name="email" placeholder="Email address" required class="p-3 border rounded" />
+          <input type="tel" name="phone" placeholder="Phone (optional)" class="p-3 border rounded" />
+          <textarea name="message" rows="4" placeholder="How can we help?" class="p-3 border rounded"></textarea>
+          <input type="hidden" name="_subject" value="Website contact form" />
+          <button type="submit" class="px-4 py-2 bg-harbor-950 text-white rounded mt-2">Send message</button>
+        </form>
       </div>
     </section>
   </main>
@@ -195,6 +215,10 @@
       </div>
     </div>
   </footer>
+
+  <a href="https://wa.me/16478485997?text=Hi%20Reserve" target="_blank" rel="noopener noreferrer" class="fixed right-6 bottom-6 bg-green-500 hover:bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.65-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.346.446-.52.151-.177.201-.297.302-.495.1-.197.05-.371-.025-.52-.075-.15-.67-1.612-.918-2.204-.242-.57-.487-.493-.67-.503l-.57-.01c-.197 0-.52.075-.792.371s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.077c.15.197 2.095 3.2 5.076 4.487 1.413.61 2.514.974 3.381 1.247 1.42.452 2.717.388 3.743.235.114-.033.36-.146.412-.289.05-.14.05-.52.035-.72-.015-.197-.18-.297-.397-.444z" fill="white"/></svg>
+  </a>
 
   <div id="loginModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4">
     <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
