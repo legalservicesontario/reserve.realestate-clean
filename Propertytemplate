@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cocotal Golf & Country Club Luxury Villa | Reserve.RealEstate</title>
+
+<meta name="description"
+      content="Luxury villa in Cocotal Golf & Country Club, Bávaro, Punta Cana, Dominican Republic. 4 bedrooms, 4.5 bathrooms and parking included.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+      href="https://reserve.realty/properties/dr-cocotal-villa.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title"
+      content="Cocotal Golf & Country Club Luxury Villa | Reserve.RealEstate">
+<meta property="og:description"
+      content="Luxury villa in Cocotal Golf & Country Club, Bávaro, Punta Cana, Dominican Republic.">
+<meta property="og:image"
+      content="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=85">
+<meta property="og:url"
+      content="https://reserve.realty/properties/dr-cocotal-villa.html">
+<meta property="og:site_name" content="Reserve.RealEstate">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title"
+      content="Cocotal Golf & Country Club Luxury Villa">
+<meta name="twitter:description"
+      content="Exclusive Caribbean property presented by Reserve.RealEstate.">
+<meta name="twitter:image"
+      content="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=85">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+:root {
+    --gold: #c8a96a;
+    --gold-light: #dfc58b;
+    --cream: #f8f6f0;
+    --dark: #0b0b0b;
+    --gray: #6b6b6b;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--cream);
+    color: #111;
+    font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+a {
+    transition: all .3s ease;
+}
+
+.gold {
+    color: var(--gold);
+}
+
+.gold-bg {
+    background: var(--gold);
+}
+
+.gold-line {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero {
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.82),
+            rgba(0,0,0,.45),
+            rgba(0,0,0,.15)
+        ),
+        url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2200&q=90');
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+}
+
+.glass {
+
+    background: rgba(255,255,255,.11);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.25);
+}
+
+.card {
+
+    background: white;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.07);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.11);
+}
+
+.property-image {
+
+    width: 100%;
+    height: 340px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    transition:
+        transform .5s ease,
+        filter .5s ease;
+
+    cursor: pointer;
+}
+
+.property-image:hover {
+
+    transform: scale(1.025);
+
+    filter: brightness(.92);
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    bottom: -7px;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--gold);
+
+    transition: width .3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.like-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: .5rem;
+
+    border: 1px solid rgba(255,255,255,.45);
+
+    background: rgba(255,255,255,.12);
+
+    padding: .85rem 1.25rem;
+
+    border-radius: 9999px;
+
+    font-weight: 600;
+
+    backdrop-filter: blur(10px);
+
+    cursor: pointer;
+
+    transition: all .3s ease;
+}
+
+.like-btn:hover {
+
+    background: rgba(255,255,255,.25);
+
+    transform: translateY(-2px);
+}
+
+.like-btn.saved {
+
+    background: white;
+
+    color: #111;
+
+    border-color: white;
+}
+
+.heart {
+
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.stat-card {
+
+    border-left: 2px solid var(--gold);
+
+    padding-left: 1.25rem;
+}
+
+.feature-icon {
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    background: rgba(200,169,106,.12);
+
+    color: var(--gold);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.25rem;
+}
+
+.gallery-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.94);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 100;
+
+    padding: 30px;
+}
+
+.gallery-overlay.active {
+    display: flex;
+}
+
+.gallery-overlay img {
+
+    max-width: 95vw;
+    max-height: 90vh;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+.close-gallery {
+
+    position: absolute;
+
+    top: 25px;
+    right: 30px;
+
+    color: white;
+
+    font-size: 2.5rem;
+
+    cursor: pointer;
+
+    z-index: 101;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+input,
+textarea,
+select {
+
+    outline: none;
+
+    border: 1px solid #ddd;
+
+    transition: border .25s ease,
+                box-shadow .25s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 0 0 3px rgba(200,169,106,.15);
+}
+
+.btn-gold {
+
+    background: var(--gold);
+
+    color: #111;
+
+    transition: all .3s ease;
+}
+
+.btn-gold:hover {
+
+    background: var(--gold-light);
+
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: 850px;
+    }
+
+    .property-image {
+        height: 280px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================================= -->
+<!-- NAVIGATION -->
+<!-- ========================================================= -->
+
+<nav class="fixed top-0 left-0 w-full z-50
+            px-6 md:px-10 py-6
+            text-white
+            bg-black/10 backdrop-blur-sm">
+
+    <div class="max-w-7xl mx-auto
+                flex justify-between items-center">
+
+        <!-- BRAND -->
+
+        <a href="https://reserve.realty"
+           class="text-xl md:text-2xl
+                  tracking-[5px] md:tracking-[8px]
+                  font-medium">
+
+            RESERVE.REALESTATE
+
+        </a>
+
+
+        <!-- DESKTOP NAV -->
+
+        <div class="hidden md:flex
+                    gap-8 lg:gap-10
+                    uppercase
+                    tracking-widest
+                    text-xs">
+
+            <a href="#details"
+               class="nav-link">
+
+                Details
+
+            </a>
+
+            <a href="#gallery"
+               class="nav-link">
+
+                Gallery
+
+            </a>
+
+            <a href="#tour"
+               class="nav-link">
+
+                Tour
+
+            </a>
+
+            <a href="#investment"
+               class="nav-link">
+
+                Investment
+
+            </a>
+
+            <a href="#contact"
+               class="nav-link">
+
+                Contact
+
+            </a>
+
+        </div>
+
+
+        <!-- MOBILE BUTTON -->
+
+        <button
+            id="menuButton"
+            class="md:hidden text-2xl"
+            aria-label="Open navigation menu"
+            type="button">
+
+            ☰
+
+        </button>
+
+    </div>
+
+
+    <!-- MOBILE NAV -->
+
+    <div id="mobileMenu"
+         class="mobile-menu md:hidden mt-5
+                bg-black/90 rounded-2xl p-6">
+
+        <div class="flex flex-col gap-5
+                    uppercase tracking-widest
+                    text-sm">
+
+            <a href="#details">Details</a>
+
+            <a href="#gallery">Gallery</a>
+
+            <a href="#tour">Tour</a>
+
+            <a href="#investment">Investment</a>
+
+            <a href="#contact">Contact</a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section class="hero text-white">
+
+    <div class="max-w-7xl mx-auto
+                px-6 md:px-8
+                w-full">
+
+        <div class="glass
+                    rounded-3xl
+                    p-7 md:p-10
+                    max-w-3xl">
+
+            <!-- COLLECTION -->
+
+            <p class="uppercase
+                      tracking-[5px] md:tracking-[8px]
+                      mb-5 md:mb-6
+                      text-xs md:text-sm
+                      gold">
+
+                Exclusive Caribbean Collection
+
+            </p>
+
+
+            <!-- TITLE -->
+
+            <h1 class="text-5xl md:text-7xl
+                       leading-tight
+                       mb-6 md:mb-8">
+
+                Cocotal Golf & Country Club
+                <br>
+
+                Luxury Villa
+
+            </h1>
+
+
+            <!-- LOCATION -->
+
+            <h2 class="text-xl md:text-2xl
+                       mb-8 md:mb-10">
+
+                Bávaro, Punta Cana,
+                Dominican Republic
+
+            </h2>
+
+
+            <!-- PRICE -->
+
+            <p class="gold uppercase
+                      tracking-widest
+                      text-sm mb-2">
+
+                Price
+
+            </p>
+
+            <p class="text-4xl md:text-5xl
+                      mb-7">
+
+                $2,800 / month
+
+            </p>
+
+
+            <!-- ACTIONS -->
+
+            <div class="flex flex-wrap gap-3">
+
+                <!-- LIKE -->
+
+                <button
+                    id="likeButton"
+                    class="like-btn"
+                    type="button"
+                    aria-pressed="false">
+
+                    <span
+                        class="heart"
+                        id="likeHeart">
+
+                        ♡
+
+                    </span>
+
+                    <span id="likeText">
+
+                        Like
+
+                    </span>
+
+                </button>
+
+
+                <!-- VIEWING -->
+
+                <a href="#contact"
+                   class="inline-block
+                          bg-white text-black
+                          px-8 md:px-10 py-4 md:py-5
+                          rounded-full
+                          uppercase
+                          tracking-widest
+                          text-xs md:text-sm
+                          font-medium">
+
+                    Schedule Private Viewing
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- QUICK PROPERTY STATS -->
+<!-- ========================================================= -->
+
+<section class="bg-white">
+
+    <div class="max-w-7xl mx-auto
+                px-6 md:px-8
+                py-10">
+
+        <div class="grid
+                    grid-cols-2
+                    md:grid-cols-4
+                    gap-8">
+
+            <div class="stat-card">
+
+                <p class="text-xs
+                          uppercase
+                          tracking-widest
+                          text-gray-500">
+
+                    Property Type
+
+                </p>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    Luxury Villa
+
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p class="text-xs
+                          uppercase
+                          tracking-widest
+                          text-gray-500">
+
+                    Bedrooms
+
+                </p>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    4
+
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p class="text-xs
+                          uppercase
+                          tracking-widest
+                          text-gray-500">
+
+                    Bathrooms
+
+                </p>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    4.5
+
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p class="text-xs
+                          uppercase
+                          tracking-widest
+                          text-gray-500">
+
+                    Parking
+
+                </p>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    Included
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- PROPERTY DETAILS -->
+<!-- ========================================================= -->
+
+<section id="details"
+         class="max-w-7xl mx-auto
+                px-6 md:px-8
+                py-20 md:py-24">
+
+    <h2 class="text-5xl md:text-6xl text-center">
+
+        Property Details
+
+    </h2>
+
+    <div class="gold-line mt-6 mb-14"></div>
+
+
+    <div class="grid
+                lg:grid-cols-2
+                gap-12
+                items-start">
+
+
+        <!-- DESCRIPTION -->
+
+        <div>
+
+            <p class="text-lg
+                      leading-9
+                      text-gray-700">
+
+                A refined villa in one of Punta Cana's
+                most sought-after gated communities,
+                offering golf, tropical landscaping,
+                and easy access to beaches and amenities.
+
+            </p>
+
+
+            <p class="mt-8
+                      text-gray-600
+                      leading-8">
+
+                Located within Cocotal Golf & Country Club,
+                this residence offers an opportunity to enjoy
+                the Caribbean lifestyle within an established
+                resort-oriented community.
+
+            </p>
+
+        </div>
+
+
+        <!-- DETAILS CARDS -->
+
+        <div class="grid grid-cols-2 gap-5">
+
+
+            <div class="card p-6">
+
+                <h3 class="gold text-xl">
+
+                    Type
+
+                </h3>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    Luxury Villa
+
+                </p>
+
+            </div>
+
+
+            <div class="card p-6">
+
+                <h3 class="gold text-xl">
+
+                    Bedrooms
+
+                </h3>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    4
+
+                </p>
+
+            </div>
+
+
+            <div class="card p-6">
+
+                <h3 class="gold text-xl">
+
+                    Bathrooms
+
+                </h3>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    4.5
+
+                </p>
+
+            </div>
+
+
+            <div class="card p-6">
+
+                <h3 class="gold text-xl">
+
+                    Parking
+
+                </h3>
+
+                <p class="text-xl md:text-2xl mt-2">
+
+                    Included
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FEATURES -->
+<!-- ========================================================= -->
+
+<section class="bg-[#111] text-white py-20 md:py-24">
+
+    <div class="max-w-7xl mx-auto
+                px-6 md:px-8">
+
+        <h2 class="text-5xl md:text-6xl text-center">
+
+            Residence Features
+
+        </h2>
+
+        <div class="gold-line mt-6 mb-14"></div>
+
+
+        <div class="grid
+                    sm:grid-cols-2
+                    lg:grid-cols-4
+                    gap-8">
+
+
+            <div class="flex gap-4">
+
+                <div class="feature-icon">
+                    ⛳
+                </div>
+
+                <div>
+
+                    <h3 class="text-2xl">
+
+                        Golf Community
+
+                    </h3>
+
+                    <p class="text-gray-400 mt-2">
+
+                        Located within
+                        Cocotal Golf & Country Club.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+                <div class="feature-icon">
+                    🔐
+                </div>
+
+                <div>
+
+                    <h3 class="text-2xl">
+
+                        Gated Community
+
+                    </h3>
+
+                    <p class="text-gray-400 mt-2">
+
+                        Established residential
+                        resort community.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+                <div class="feature-icon">
+                    🌴
+                </div>
+
+                <div>
+
+                    <h3 class="text-2xl">
+
+                        Tropical Setting
+
+                    </h3>
+
+                    <p class="text-gray-400 mt-2">
+
+                        Landscaped Caribbean
+                        surroundings.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+                <div class="feature-icon">
+                    🏖
+                </div>
+
+                <div>
+
+                    <h3 class="text-2xl">
+
+                        Beach Access
+
+                    </h3>
+
+                    <p class="text-gray-400 mt-2">
+
+                        Convenient access to
+                        Punta Cana beaches.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- GALLERY -->
+<!-- ========================================================= -->
+
+<section id="gallery"
+         class="bg-white py-20 md:py-24">
+
+    <div class="max-w-7xl mx-auto
+                px-6 md:px-8">
+
+        <h2 class="text-5xl md:text-6xl
+                   text-center mb-6">
+
+            Property Gallery
+
+        </h2>
+
+        <div class="gold-line mb-14"></div>
+
+
+        <div class="grid
+                    md:grid-cols-2
+                    lg:grid-cols-3
+                    gap-7">
+
+
+            <img
+                class="property-image"
+                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85"
+                alt="Cocotal Golf & Country Club luxury villa exterior"
+                data-gallery="true">
+
+
+            <img
+                class="property-image"
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85"
+                alt="Luxury villa living room"
+                data-gallery="true">
+
+
+            <img
+                class="property-image"
+                src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=85"
+                alt="Luxury villa bedroom"
+                data-gallery="true">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CINEMATIC TOUR -->
+<!-- ========================================================= -->
+
+<section id="tour"
+         class="py-20 md:py-24 px-6 md:px-8">
+
+    <div class="max-w-6xl mx-auto">
+
+        <h2 class="text-5xl md:text-6xl
+                   text-center mb-6">
+
+            Cinematic Property Tour
+
+        </h2>
+
+        <div class="gold-line mb-14"></div>
+
+
+        <div class="card p-5 md:p-8">
+
+            <video
+                controls
+                class="w-full rounded-3xl"
+                poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=85">
+
+                <!--
+                VIDEO FILE WILL BE INSERTED HERE
+                BY THE AUTOMATION BOT LATER.
+
+                Example:
+
+                <source
+                    src="property-tour.mp4"
+                    type="video/mp4">
+                -->
+
+                Your browser does not support
+                HTML5 video.
+
+            </video>
+
+
+            <p class="text-center
+                      mt-6
+                      text-gray-500">
+
+                Private property walkthrough
+                coming soon.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- INVESTMENT POSITIONING -->
+<!-- ========================================================= -->
+
+<section id="investment"
+         class="bg-[#f1eee6]
+                py-20 md:py-24">
+
+    <div class="max-w-6xl mx-auto
+                px-6 md:px-8
+                text-center">
+
+        <p class="uppercase
+                  tracking-[5px]
+                  text-xs
+                  gold
+                  mb-5">
+
+            Reserve Investment Perspective
+
+        </p>
+
+
+        <h2 class="text-5xl md:text-6xl">
+
+            More Than a Residence
+
+        </h2>
+
+        <div class="gold-line mt-6 mb-10"></div>
+
+
+        <p class="max-w-3xl mx-auto
+                  text-lg
+                  leading-8
+                  text-gray-700">
+
+            Properties in high-demand Caribbean
+            destinations can appeal to both lifestyle
+            buyers and investors seeking exposure to
+            tourism-driven real estate markets.
+
+        </p>
+
+
+        <div class="grid
+                    md:grid-cols-3
+                    gap-6
+                    mt-12">
+
+
+            <div class="card p-8">
+
+                <p class="gold uppercase
+                          tracking-widest
+                          text-xs">
+
+                    Location
+
+                </p>
+
+                <h3 class="text-3xl mt-3">
+
+                    Punta Cana
+
+                </h3>
+
+                <p class="text-gray-600 mt-3">
+
+                    One of the Dominican Republic's
+                    major tourism destinations.
+
+                </p>
+
+            </div>
+
+
+            <div class="card p-8">
+
+                <p class="gold uppercase
+                          tracking-widest
+                          text-xs">
+
+                    Lifestyle
+
+                </p>
+
+                <h3 class="text-3xl mt-3">
+
+                    Caribbean Living
+
+                </h3>
+
+                <p class="text-gray-600 mt-3">
+
+                    Golf, beaches, hospitality,
+                    dining and resort amenities.
+
+                </p>
+
+            </div>
+
+
+            <div class="card p-8">
+
+                <p class="gold uppercase
+                          tracking-widest
+                          text-xs">
+
+                    Potential
+
+                </p>
+
+                <h3 class="text-3xl mt-3">
+
+                    Rental Opportunity
+
+                </h3>
+
+                <p class="text-gray-600 mt-3">
+
+                    Potential short-term or
+                    long-term rental positioning,
+                    subject to applicable rules.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <p class="text-xs
+                  text-gray-500
+                  max-w-3xl
+                  mx-auto
+                  mt-10">
+
+            Investment information is provided for
+            general informational purposes only.
+            Rental income, appreciation, financing
+            and investment returns are not guaranteed
+            and should be independently evaluated.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- LOCATION -->
+<!-- ========================================================= -->
+
+<section class="py-20 md:py-24
+                px-6 md:px-8">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="grid
+                    lg:grid-cols-2
+                    gap-12
+                    items-center">
+
+
+            <div>
+
+                <p class="uppercase
+                          tracking-[5px]
+                          text-xs
+                          gold
+                          mb-5">
+
+                    Destination
+
+                </p>
+
+
+                <h2 class="text-5xl md:text-6xl">
+
+                    Bávaro · Punta Cana
+
+                </h2>
+
+
+                <div class="gold-line
+                            !mx-0
+                            mt-6
+                            mb-8">
+
+                </div>
+
+
+                <p class="text-lg
+                          leading-8
+                          text-gray-700">
+
+                    Cocotal Golf & Country Club
+                    offers a resort-oriented setting
+                    within the Punta Cana area of the
+                    Dominican Republic.
+
+                </p>
+
+
+                <p class="mt-5
+                          text-gray-600
+                          leading-8">
+
+                    Contact Reserve for property-specific
+                    location information, viewing
+                    arrangements and availability.
+
+                </p>
+
+            </div>
+
+
+            <!-- MAP PLACEHOLDER -->
+
+            <div class="card overflow-hidden
+                        min-h-[350px]
+                        bg-gray-200
+                        flex items-center
+                        justify-center">
+
+                <!--
+                FUTURE AUTOMATION:
+
+                Replace this section with a
+                Google Maps / Mapbox embed or
+                static map image when coordinates
+                are available.
+                -->
+
+                <div class="text-center p-8">
+
+                    <div class="text-4xl mb-4">
+                        📍
+                    </div>
+
+                    <h3 class="text-3xl">
+
+                        Cocotal Golf & Country Club
+
+                    </h3>
+
+                    <p class="text-gray-600 mt-3">
+
+                        Bávaro, Punta Cana
+                        <br>
+                        Dominican Republic
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CONTACT -->
+<!-- ========================================================= -->
+
+<section id="contact"
+         class="bg-[#111]
+                text-white
+                py-20 md:py-24
+                px-6 md:px-8">
+
+    <div class="max-w-5xl mx-auto">
+
+        <p class="text-center
+                  uppercase
+                  tracking-[5px]
+                  text-xs
+                  gold
+                  mb-5">
+
+            Reserve.RealEstate
+
+        </p>
+
+
+        <h2 class="text-5xl md:text-6xl
+                   text-center mb-6">
+
+            Reserve Your Private Viewing
+
+        </h2>
+
+
+        <div class="gold-line mb-14"></div>
+
+
+        <form
+            id="propertyInquiryForm"
+            class="grid
+                   md:grid-cols-2
+                   gap-5">
+
+
+            <!-- PROPERTY IDENTIFICATION -->
+
+            <input
+                type="hidden"
+                name="property_id"
+                value="dr-cocotal-villa">
+
+
+            <input
+                type="hidden"
+                name="property_title"
+                value="Cocotal Golf & Country Club Luxury Villa">
+
+
+            <input
+                type="hidden"
+                name="property_location"
+                value="Bávaro, Punta Cana, Dominican Republic">
+
+
+            <!-- NAME -->
+
+            <div>
+
+                <label
+                    for="fullName"
+                    class="block mb-2
+                           text-sm
+                           text-gray-300">
+
+                    Full Name
+
+                </label>
+
+                <input
+                    id="fullName"
+                    name="name"
+                    type="text"
+                    required
+                    autocomplete="name"
+                    class="w-full p-5
+                           rounded-xl
+                           text-black"
+                    placeholder="Full Name">
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div>
+
+                <label
+                    for="email"
+                    class="block mb-2
+                           text-sm
+                           text-gray-300">
+
+                    Email Address
+
+                </label>
+
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    class="w-full p-5
+                           rounded-xl
+                           text-black"
+                    placeholder="Email Address">
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div>
+
+                <label
+                    for="phone"
+                    class="block mb-2
+                           text-sm
+                           text-gray-300">
+
+                    Phone Number
+
+                </label>
+
+                <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                    class="w-full p-5
+                           rounded-xl
+                           text-black"
+                    placeholder="Phone Number">
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div>
+
+                <label
+                    for="viewingDate"
+                    class="block mb-2
+                           text-sm
+                           text-gray-300">
+
+                    Preferred Viewing Date
+
+                </label>
+
+                <input
+                    id="viewingDate"
+                    name="viewing_date"
+                    type="date"
+                    class="w-full p-5
+                           rounded-xl
+                           text-black">
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="md:col-span-2">
+
+                <label
+                    for="message"
+                    class="block mb-2
+                           text-sm
+                           text-gray-300">
+
+                    Message
+
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    class="w-full p-5
+                           rounded-xl
+                           text-black"
+                    placeholder="Tell us how we can assist you..."></textarea>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="md:col-span-2
+                       btn-gold
+                       py-5
+                       rounded-xl
+                       uppercase
+                       tracking-[5px]
+                       font-semibold">
+
+                Request Information
+
+            </button>
+
+        </form>
+
+
+        <p id="formMessage"
+           class="text-center
+                  mt-6
+                  text-gray-400
+                  hidden">
+
+            Thank you. Your inquiry has been received.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- LISTING INFORMATION -->
+<!-- ========================================================= -->
+
+<section class="bg-white py-10">
+
+    <div class="max-w-5xl mx-auto
+                px-6
+                text-center">
+
+        <p class="text-xs
+                  uppercase
+                  tracking-widest
+                  text-gray-400">
+
+            Reserve Property Reference
+
+        </p>
+
+        <p class="text-sm
+                  text-gray-500
+                  mt-2">
+
+            Listing ID:
+            <strong>
+
+                dr-cocotal-villa
+
+            </strong>
+
+        </p>
+
+        <p class="text-xs
+                  text-gray-400
+                  mt-3">
+
+            Property information should be
+            independently verified prior to
+            entering into any transaction.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-black
+               text-gray-400
+               text-center
+               py-12">
+
+    <div class="text-white
+                text-xl md:text-2xl
+                tracking-[6px] md:tracking-[8px]
+                mb-5">
+
+        RESERVE.REALESTATE
+
+    </div>
+
+
+    <p>
+
+        Luxury Real Estate Collection
+
+    </p>
+
+
+    <div class="flex
+                justify-center
+                gap-6
+                mt-6
+                text-sm">
+
+        <a href="https://reserve.realty"
+           class="hover:text-white">
+
+            Website
+
+        </a>
+
+        <a href="#contact"
+           class="hover:text-white">
+
+            Contact
+
+        </a>
+
+    </div>
+
+
+    <p class="mt-7 text-xs">
+
+        © 2026 Reserve.RealEstate
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+
+<!-- ========================================================= -->
+<!-- IMAGE LIGHTBOX -->
+<!-- ========================================================= -->
+
+<div
+    id="galleryOverlay"
+    class="gallery-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Property image viewer">
+
+    <button
+        id="closeGallery"
+        class="close-gallery"
+        type="button"
+        aria-label="Close image viewer">
+
+        ×
+
+    </button>
+
+
+    <img
+        id="galleryImage"
+        src=""
+        alt="Property gallery image">
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- STRUCTURED DATA -->
+<!-- ========================================================= -->
+
+<script type="application/ld+json">
+
+{
+    "@context": "https://schema.org",
+
+    "@type": "WebPage",
+
+    "name":
+        "Cocotal Golf & Country Club Luxury Villa",
+
+    "description":
+        "Luxury villa in Cocotal Golf & Country Club, Bávaro, Punta Cana, Dominican Republic.",
+
+    "url":
+        "https://reserve.realty/properties/dr-cocotal-villa.html",
+
+    "publisher": {
+
+        "@type": "Organization",
+
+        "name":
+            "Reserve.RealEstate",
+
+        "url":
+            "https://reserve.realty"
+
+    },
+
+    "mainEntity": {
+
+        "@type": "Residence",
+
+        "name":
+            "Cocotal Golf & Country Club Luxury Villa",
+
+        "description":
+            "A refined villa in one of Punta Cana's most sought-after gated communities, offering golf, tropical landscaping, and easy access to beaches and amenities.",
+
+        "numberOfBedrooms": 4,
+
+        "numberOfBathroomsTotal": 4.5,
+
+        "address": {
+
+            "@type": "PostalAddress",
+
+            "addressLocality":
+                "Bávaro",
+
+            "addressRegion":
+                "Punta Cana",
+
+            "addressCountry":
+                "Dominican Republic"
+
+        },
+
+        "offers": {
+
+            "@type": "Offer",
+
+            "price":
+                "2800",
+
+            "priceCurrency":
+                "USD",
+
+            "priceSpecification": {
+
+                "@type":
+                    "UnitPriceSpecification",
+
+                "price":
+                    "2800",
+
+                "priceCurrency":
+                    "USD",
+
+                "unitText":
+                    "MONTH"
+
+            }
+
+        }
+
+    }
+
+}
+
+</script>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+(function () {
+
+
+    /* =========================================================
+       PROPERTY ID
+    ========================================================= */
+
+    const PROPERTY_ID =
+        'dr-cocotal-villa';
+
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    const menuButton =
+        document.getElementById('menuButton');
+
+    const mobileMenu =
+        document.getElementById('mobileMenu');
+
+
+    if (menuButton) {
+
+        menuButton.addEventListener('click', function () {
+
+            mobileMenu.classList.toggle('active');
+
+        });
+
+    }
+
+
+    document.querySelectorAll('#mobileMenu a')
+        .forEach(function (link) {
+
+            link.addEventListener('click', function () {
+
+                mobileMenu.classList.remove('active');
+
+            });
+
+        });
+
+
+
+    /* =========================================================
+       SAVED / LIKED PROPERTY
+    ========================================================= */
+
+    const likeButton =
+        document.getElementById('likeButton');
+
+    const likeHeart =
+        document.getElementById('likeHeart');
+
+    const likeText =
+        document.getElementById('likeText');
+
+
+    function getSavedListings() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem('savedListings') || '[]'
+            );
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    function setSavedListings(listings) {
+
+        localStorage.setItem(
+            'savedListings',
+            JSON.stringify(listings)
+        );
+
+    }
+
+
+    function isSaved() {
+
+        return getSavedListings()
+            .includes(PROPERTY_ID);
+
+    }
+
+
+    function updateLikeButton() {
+
+        const saved = isSaved();
+
+
+        likeHeart.textContent =
+            saved ? '♥' : '♡';
+
+
+        likeText.textContent =
+            saved ? 'Liked' : 'Like';
+
+
+        likeButton.classList.toggle(
+            'saved',
+            saved
+        );
+
+
+        likeButton.setAttribute(
+            'aria-pressed',
+            String(saved)
+        );
+
+    }
+
+
+    if (likeButton) {
+
+        likeButton.addEventListener(
+            'click',
+            function () {
+
+
+                /*
+                 * Existing Reserve login logic.
+                 *
+                 * If there is no user email stored,
+                 * send visitor to the main site.
+                 */
+
+                const userEmail =
+                    localStorage.getItem('userEmail');
+
+
+                if (!userEmail) {
+
+                    window.location.href =
+                        'index.html';
+
+                    return;
+
+                }
+
+
+                const saved =
+                    getSavedListings();
+
+
+                const existingIndex =
+                    saved.indexOf(PROPERTY_ID);
+
+
+                if (existingIndex === -1) {
+
+                    saved.push(PROPERTY_ID);
+
+                } else {
+
+                    saved.splice(
+                        existingIndex,
+                        1
+                    );
+
+                }
+
+
+                setSavedListings(saved);
+
+                updateLikeButton();
+
+            }
+        );
+
+    }
+
+
+    updateLikeButton();
+
+
+
+    /* =========================================================
+       GALLERY LIGHTBOX
+    ========================================================= */
+
+    const overlay =
+        document.getElementById(
+            'galleryOverlay'
+        );
+
+
+    const galleryImage =
+        document.getElementById(
+            'galleryImage'
+        );
+
+
+    const closeGallery =
+        document.getElementById(
+            'closeGallery'
+        );
+
+
+    document.querySelectorAll(
+        '[data-gallery="true"]'
+    ).forEach(function (image) {
+
+
+        image.addEventListener(
+            'click',
+            function () {
+
+                galleryImage.src =
+                    image.src;
+
+                galleryImage.alt =
+                    image.alt;
+
+                overlay.classList.add(
+                    'active'
+                );
+
+            }
+        );
+
+    });
+
+
+    function closeImageGallery() {
+
+        overlay.classList.remove(
+            'active'
+        );
+
+        galleryImage.src = '';
+
+    }
+
+
+    closeGallery.addEventListener(
+        'click',
+        closeImageGallery
+    );
+
+
+    overlay.addEventListener(
+        'click',
+        function (event) {
+
+            if (event.target === overlay) {
+
+                closeImageGallery();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        'keydown',
+        function (event) {
+
+            if (
+                event.key === 'Escape' &&
+                overlay.classList.contains('active')
+            ) {
+
+                closeImageGallery();
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================================
+       CONTACT FORM
+       ========================================================= */
+
+    const form =
+        document.getElementById(
+            'propertyInquiryForm'
+        );
+
+
+    const formMessage =
+        document.getElementById(
+            'formMessage'
+        );
+
+
+    form.addEventListener(
+        'submit',
+        function (event) {
+
+            /*
+             * Prevents the browser from attempting
+             * to submit to a nonexistent endpoint.
+             *
+             * The Python / GitHub automation system
+             * can later connect this form to:
+             *
+             * - Formspree
+             * - Netlify Forms
+             * - Email
+             * - CRM
+             * - Reserve API
+             * - WhatsApp
+             *
+             */
+
+            event.preventDefault();
+
+
+            formMessage.classList.remove(
+                'hidden'
+            );
+
+
+            form.reset();
+
+
+            setTimeout(function () {
+
+                formMessage.classList.add(
+                    'hidden'
+                );
+
+            }, 6000);
+
+        }
+    );
+
+
+})();
+
+</script>
+
+
+</body>
+</html>
